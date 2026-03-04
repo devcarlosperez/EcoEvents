@@ -8,6 +8,7 @@ app.use(express.json());
 const PORT = 8000;
 
 require("./routes/user.routes")(app);
+require("./routes/comment.routes")(app);
 
 async function startServer() {
   try {
