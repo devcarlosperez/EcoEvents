@@ -58,7 +58,7 @@ exports.create = (req, res) => {
             message: err.message || "Some error occurred while creating the user."
         });
     });
-}
+};
 
 exports.findAll = (req, res) => {
   userObject
@@ -74,10 +74,10 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
-  const userId = req.params.id;
+  const id = req.params.id;
 
   userObject
-    .findOne({ where: { id: userId } })
+    .findOne({ where: { id: id } })
     .then((data) => {
       res.send(data);
     })
@@ -89,7 +89,7 @@ exports.findOne = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const userId = req.params.id;
+  const id = req.params.id;
   const name = req.body.name;
   const surname = req.body.surname;
   const email = req.body.email;
@@ -106,7 +106,7 @@ exports.update = (req, res) => {
   }
 
   userObject
-    .update(user, { where: { id: userId } })
+    .update(user, { where: { id: id } })
     .then((data) => {
       res.send(data);
     })
@@ -118,10 +118,10 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  const userId = req.params.id;
+  const id = req.params.id;
 
   userObject
-    .destroy({ where: { id: userId } })
+    .destroy({ where: { id: id } })
     .then((data) => {
       res.send({
         message: "User has been deleted.",
