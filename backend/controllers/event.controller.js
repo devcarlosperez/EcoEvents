@@ -77,8 +77,7 @@ exports.update = (req, res) => {
     event_date: req.body.event_date,
     event_time: req.body.event_time,
     location: req.body.location,
-    max_participants: req.body.max_participants,
-    status: req.body.status
+    max_participants: req.body.max_participants
   };
 
   if (req.file) {
