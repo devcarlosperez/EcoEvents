@@ -1,15 +1,19 @@
 @use'../../Styles/globals'as globals;
 
+h3{
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
 .inputStyle {
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   input {
     width: 100%;
-    height: 42px;
-    background-color: globals.$color_neutral_04;
+    height: 24px;
+   
+    background-color: globals.$color_secondary_02;
     border: solid 1px black;
     border-radius: 8px;
-
-    font-size: 1rem;
-    padding-left: 4px;
+    font-size: 0.8rem;
+    padding-left: 12px;
   }
 }

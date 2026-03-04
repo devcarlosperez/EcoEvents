@@ -1,9 +1,9 @@
 import { useContext, useState } from "react"
 import { Input } from '../../Components/Input/input'
-import {Submit} from '../../Components/Submit/submit'
+import { Submit } from '../../Components/Submit/submit'
 import { AuthContext } from '../../Components/Context/AuthContext'
-import {Title} from '../../Components/Title/title'
-import style from'./Login.module.scss'
+import { Title } from '../../Components/Title/title'
+import style from './Login.module.scss'
 
 export function Login() {
     const [error, setError] = useState<string | null>(null)
@@ -44,15 +44,23 @@ export function Login() {
 
     return (
         <>
-          <Title  text={'Login'} /> 
+            <Title text={'Login'} />
 
             <div className={style.formContainer}>
                 <form className={style.contactForm} onSubmit={(e) => postLogin(e)}>
-                    <Input type="text" name="email" autoComplete="email" label="Email"></Input>
-                    <Input type="password" name="password" autoComplete="current-password" label="Password"></Input>
-                    <Submit className={style.button} value="Login"></Submit>
+                    <Input type="text" name="email" autoComplete="email" label="Email" />
+                    <Input type="password" name="password" autoComplete="current-password" label="Password" />
+
+                    <Submit className={style.button} value="Login" />
+
+                    {error && <b className={style.error}>{error}</b>}
+
+                    <h4><b>Don't have an account?</b></h4>
+
+                    <button type="button" className={style.button}>
+                        Sign up
+                    </button>
                 </form>
-                {error && <b className={style.error}>{error}</b>}
             </div>
         </>
     )
