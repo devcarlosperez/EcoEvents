@@ -7,6 +7,8 @@ app.use(express.json());
 
 const PORT = 8000;
 
+require("./routes/user.routes")(app);
+
 async function startServer() {
   try {
     await sequelize.authenticate();
