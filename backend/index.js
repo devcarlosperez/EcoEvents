@@ -4,10 +4,13 @@ const { sequelize } = require('./models');
 
 const app = express();
 app.use(express.json());
+// Serve static images
+app.use('/images', express.static('public/images'));
 
 const PORT = 8000;
 
 require("./routes/user.routes")(app);
+require("./routes/event.routes")(app);
 require("./routes/comment.routes")(app);
 require("./routes/event-participant.routes")(app);
 
