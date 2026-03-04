@@ -18,8 +18,7 @@ exports.create = (req, res) => {
     event_time: req.body.event_time,
     location: req.body.location,
     image_url: req.file ? req.file.filename : null,
-    max_participants: req.body.max_participants,
-    status: req.body.status || 'pending'
+    max_participants: req.body.max_participants
   };
 
   eventObject.create(event)
