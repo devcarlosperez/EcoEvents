@@ -1,8 +1,8 @@
 import { useContext, useState } from "react"
-import { Input } from '../Components/Input/input'
-import {Submit} from '../Components/Submit/submit'
-import { AuthContext } from '../Components/Context/AuthContext'
-import {Title} from '../Components/Title/title'
+import { Input } from '../../Components/Input/input'
+import {Submit} from '../../Components/Submit/submit'
+import { AuthContext } from '../../Components/Context/AuthContext'
+import {Title} from '../../Components/Title/title'
 import style from'./Login.module.scss'
 
 export function Login() {
@@ -48,8 +48,8 @@ export function Login() {
 
             <div className={style.formContainer}>
                 <form className={style.contactForm} onSubmit={(e) => postLogin(e)}>
-                    <Input type="text" name="username" label="Username"></Input>
-                    <Input type="password" name="password" label="Password"></Input>
+                    <Input type="text" name="username" autoComplete="username" label="Username"></Input>
+                    <Input type="password" name="password" autoComplete="current-password" label="Password"></Input>
                     <Submit className={style.button} value="Login"></Submit>
                 </form>
                 {error && <b className={style.error}>{error}</b>}

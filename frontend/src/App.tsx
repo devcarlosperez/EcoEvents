@@ -1,18 +1,16 @@
-// note: BrowserRouter/Routes live in react-router-dom for web apps
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import { BrowserRouter, Route, Routes} from 'react-router-dom'
 import { Header } from './Components/Header/Header'
-import { Login } from './Pages/Login'
+import { Login } from './Pages/Login/Login'
+import{About} from './Pages/About/About'
 
 function App() {
+
   return (
     <BrowserRouter>
       <Header />
       <Routes>
-        {/* redirect root to login so something renders at `/` */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/About" element={<About />} />
         <Route path="/login" element={<Login />} />
-        {/* optional catch‑all */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   )

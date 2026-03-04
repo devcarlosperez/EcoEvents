@@ -5,6 +5,7 @@ interface inputProps {
   type: string
   name: string
   value?: string
+  autoComplete: string
 }
 
 export function Input({ label, type, name }: inputProps) {
