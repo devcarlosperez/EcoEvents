@@ -1,9 +1,11 @@
+@use'../../Styles/globals'as globals;
+
 .inputStyle {
   font-size: 1.1rem;
   input {
     width: 100%;
     height: 42px;
-    background-color: rgb(240, 240, 240);
+    background-color: globals.$color_neutral_04;
     border: solid 1px black;
     border-radius: 8px;
 

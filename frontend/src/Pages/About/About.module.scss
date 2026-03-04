@@ -1,0 +1,11 @@
+@use'../../Styles/globals'as globals;
+
+body{
+    background: color globals.$color_secondary_02;;
+}
+.textContainer{
+    background-color: globals.$color_secondary_02;
+}
+.cardContainer{
+    background-color: globals.$color_secondary_02;
+}

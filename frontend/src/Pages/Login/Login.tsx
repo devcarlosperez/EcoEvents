@@ -14,13 +14,13 @@ export function Login() {
 
         //Gem input values
         const form = e.currentTarget
-        const userName = (form.username as HTMLInputElement).value
+        const email = (form.email as HTMLInputElement).value
         const passWord = (form.password as HTMLInputElement).value
         //Opret body (URLSearchParamms)
         const body = new URLSearchParams()
 
         //Append input values til body
-        body.append('username', userName)
+        body.append('email', email)
         body.append('password', passWord)
 
         const url = 'http://localhost:3000/login'
@@ -48,7 +48,7 @@ export function Login() {
 
             <div className={style.formContainer}>
                 <form className={style.contactForm} onSubmit={(e) => postLogin(e)}>
-                    <Input type="text" name="username" autoComplete="username" label="Username"></Input>
+                    <Input type="text" name="email" autoComplete="email" label="Email"></Input>
                     <Input type="password" name="password" autoComplete="current-password" label="Password"></Input>
                     <Submit className={style.button} value="Login"></Submit>
                 </form>
