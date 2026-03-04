@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "node index.js",
     "migrations": "npx sequelize-cli db:migrate",
-    "drop:migrations": "npx sequelize-cli db:migrate:undo:all"
+    "drop:migrations": "npx sequelize-cli db:migrate:undo:all",
+    "seeds": "npx sequelize-cli db:seed:all",
+    "drop:seeds": "npx sequelize-cli db:seed:undo:all"
   },
   "keywords": [],
   "author": "",
