@@ -1,4 +1,5 @@
 import headerImg from '../../assets/Img/Logo-mobile.svg'
+import style from '../Header/Header.module.scss'
 
 interface Headerprops {
     headerLogo?: string;
@@ -7,8 +8,8 @@ interface Headerprops {
  export function Header ({ headerLogo = headerImg, title= ''}: Headerprops){
     return (
     <>
-    <img src={headerLogo} alt="HeaderLogo" />
-    <h1>{title}</h1>
+    <img className={style.headerLogo} src={headerLogo} alt="HeaderLogo" />
+    <h1 className={style.titletext}>{title}</h1>
 
     </>
     );

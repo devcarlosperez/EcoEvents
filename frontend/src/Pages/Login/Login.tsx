@@ -33,7 +33,7 @@ export function Login() {
                 setError('')
             })
             .catch((error) => {
-                console.error('Error loggin in: ', error);
+                console.error('Error login in: ', error);
                 setError('something went wrong- try again')
 
             })
@@ -44,7 +44,7 @@ export function Login() {
 
     return (
         <>
-          <Title text={'Login'} /> 
+          <Title  text={'Login'} /> 
 
             <div className={style.formContainer}>
                 <form className={style.contactForm} onSubmit={(e) => postLogin(e)}>
