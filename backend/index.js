@@ -11,6 +11,7 @@ const PORT = 8000;
 
 require("./routes/user.routes")(app);
 require("./routes/event.routes")(app);
+require("./routes/comment.routes")(app);
 require("./routes/event-participant.routes")(app);
 
 async function startServer() {
