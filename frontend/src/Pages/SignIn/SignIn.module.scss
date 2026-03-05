@@ -1,30 +1,41 @@
 @use '../../Styles/globals' as globals;
 
+h3{
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
 .formContainer {
  font-family: sans-serif;
   display: flex;
   justify-content: left;
-  margin: 20px;
+  margin: 203px;
 }
 
 .contactForm {
+  margin-top: none;
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 482px;
   padding: 12px;
   border-radius: 12px;
-  background-color:globals.$color_neutral_03;
-  font-family: sans-serif;
+  background-color:globals.$color_neutral_04;
+  font-family: "Roboto", sans-serif;
   gap: 16px;
 }
-
+.contactContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 18px;
+    grid-template-columns: 1fr 1fr ;
+   
+}
 .button {
   padding: 6px 12px; 
   font-size: 0.9rem; 
   border: none;  
   border-radius: 6px;
   font-weight: bold;
-  background-color: globals.$color_neutral_03;
+  background-color: globals.$color_info;
   color: globals.$color_black;
   cursor: pointer;
 }
@@ -38,4 +49,3 @@
   font-size: 0.9rem;
   margin-bottom: 10px;
 }
-

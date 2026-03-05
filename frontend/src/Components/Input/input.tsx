@@ -12,7 +12,7 @@ export function Input({ label, type, name }: inputProps) {
   return (
     <label className={style.inputStyle}>
       {label}
-      <input type={type} name={name} placeholder={`Name ${name}`}></input>
+      <input type={type} name={name} placeholder={`${name}`}></input>
     </label>
   )
 }
