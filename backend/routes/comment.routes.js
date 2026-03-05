@@ -1,17 +1,18 @@
 module.exports = (app) => {
   const comments = require("../controllers/comment.controller.js");
+  const { verifyToken } = require("../middlewares/auth.js");
 
   const router = require("express").Router();
 
-  router.post("/", comments.create);
+  router.post("/", verifyToken, comments.create);
 
-  router.get("/", comments.findAll);
+  router.get("/", verifyToken, comments.findAll);
 
-  router.get("/:id", comments.findOne);
+  router.get("/:id", verifyToken, comments.findOne);
 
-  router.put("/:id", comments.update);
-
-  router.delete("/:id", comments.delete);
+  router.put("/:id", verifyToken, comments.update);
+  
+  router.delete("/:id", verifyToken, comments.delete);
 
   app.use("/api/comments", router);
 };
