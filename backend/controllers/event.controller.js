@@ -105,6 +105,31 @@ exports.update = (req, res) => {
     });
 };
 
+exports.updateStatus = (req, res) => {
+  const id = req.params.id;
+  const { status } = req.body;
+
+  eventObject.update({ status }, {
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Event status was updated successfully."
+        });
+      } else {
+        res.send({
+          message: `Cannot update status of Event with id=${id}. Maybe Event was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating status of Event with id=" + id
+      });
+    });
+};
+
 exports.delete = (req, res) => {
   const id = req.params.id;
 

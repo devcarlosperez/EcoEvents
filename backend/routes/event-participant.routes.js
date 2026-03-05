@@ -1,17 +1,18 @@
 module.exports = app => {
   const eventParticipants = require("../controllers/event-participant.controller.js");
+  const { verifyToken } = require("../middlewares/auth.js");
 
-  var router = require("express").Router();
+  const router = require("express").Router();
 
-  router.post("/", eventParticipants.create);
+  router.post("/", verifyToken, eventParticipants.create);
 
-  router.get("/", eventParticipants.findAll);
+  router.get("/", verifyToken, eventParticipants.findAll);
 
-  router.get("/:id", eventParticipants.findOne);
+  router.get("/:id", verifyToken, eventParticipants.findOne);
 
-  router.put("/:id", eventParticipants.update);
-
-  router.delete("/:id", eventParticipants.delete);
+  router.put("/:id", verifyToken, eventParticipants.update);
+  
+  router.delete("/:id", verifyToken, eventParticipants.delete);
 
   app.use('/api/event-participants', router);
 };
