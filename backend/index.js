@@ -3,8 +3,11 @@ const express = require('express');
 const { sequelize } = require('./models');
 
 const app = express();
+
 app.use(express.json());
-// Serve static images
+
+app.use(express.urlencoded({ extended: true }));
+
 app.use('/images', express.static('public/images'));
 
 const PORT = 8000;

@@ -1,4 +1,5 @@
 const db = require("../models");
+const fs = require("fs");
 const eventObject = db.event;
 
 exports.create = (req, res) => {
@@ -10,7 +11,7 @@ exports.create = (req, res) => {
   }
 
   const event = {
-    creator_id: req.body.creator_id,
+    creator_id: req.user.id,
     name: req.body.name,
     description: req.body.description,
     event_type: req.body.event_type,
@@ -70,7 +71,6 @@ exports.update = (req, res) => {
   const id = req.params.id;
   
   const event = {
-    creator_id: req.body.creator_id,
     name: req.body.name,
     description: req.body.description,
     event_type: req.body.event_type,
@@ -133,23 +133,47 @@ exports.updateStatus = (req, res) => {
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  eventObject.destroy({
-    where: { id: id }
-  })
-    .then(num => {
-      if (num == 1) {
-        res.send({
-          message: "Event was deleted successfully!"
-        });
-      } else {
-        res.send({
+  eventObject.findByPk(id)
+    .then(data => {
+      if (!data) {
+        res.status(404).send({
           message: `Cannot delete Event with id=${id}. Maybe Event was not found!`
         });
+        return;
       }
+
+      eventObject.destroy({
+        where: { id: id }
+      })
+        .then(num => {
+          if (num == 1) {
+            if (data.image_url) {
+              const imagePath = __dirname + "/../public/images/" + data.image_url;
+              fs.unlink(imagePath, (err) => {
+                if (err) {
+                  console.log("Could not delete image file: " + err);
+                }
+              });
+            }
+
+            res.send({
+              message: "Event was deleted successfully!"
+            });
+          } else {
+            res.send({
+              message: `Cannot delete Event with id=${id}.`
+            });
+          }
+        })
+        .catch(err => {
+          res.status(500).send({
+            message: "Could not delete Event with id=" + id
+          });
+        });
     })
     .catch(err => {
       res.status(500).send({
-        message: "Could not delete Event with id=" + id
+        message: "Error retrieving Event with id=" + id
       });
     });
 };

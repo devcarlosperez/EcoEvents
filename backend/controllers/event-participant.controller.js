@@ -14,16 +14,34 @@ exports.create = (req, res) => {
     event_id: req.body.event_id
   };
 
-  eventParticipantObject.create(eventParticipant)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the EventParticipant."
+  eventParticipantObject.findOne({
+    where: {
+      user_id: eventParticipant.user_id,
+      event_id: eventParticipant.event_id
+    }
+  }).then(existing => {
+    if (existing) {
+      res.status(400).send({
+        message: "User is already participating in this event."
       });
+      return;
+    }
+
+    eventParticipantObject.create(eventParticipant)
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while creating the EventParticipant."
+        });
+      });
+  }).catch(err => {
+    res.status(500).send({
+      message: "Error checking participation status."
     });
+  });
 };
 
 exports.findAll = (req, res) => {

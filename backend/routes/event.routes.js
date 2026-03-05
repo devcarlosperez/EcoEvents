@@ -13,7 +13,7 @@ module.exports = app => {
 
   router.put("/:id", verifyToken, isAdmin, upload.single('image'), events.update);
 
-  router.patch("/status/:id", verifyToken, isAdmin, events.updateStatus);
+  router.put("/status/:id", verifyToken, isAdmin, events.updateStatus);
 
   router.delete("/:id", verifyToken, isAdmin, events.delete);
 

@@ -1,11 +1,26 @@
 const db = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const userObject = db.users;
+const userObject = db.user;
 
 exports.login = (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith("Basic ")) {
+    return res.status(401).send({
+      message: "Missing or invalid Authorization header. Use Basic Auth."
+    });
+  }
+
+  const base64Credentials = authHeader.split(" ")[1];
+  const credentials = Buffer.from(base64Credentials, "base64").toString("utf-8");
+  const [email, password] = credentials.split(":");
+
+  if (!email || !password) {
+    return res.status(401).send({
+      message: "Invalid credentials format."
+    });
+  }
 
   userObject.findOne({ where: { email: email } })
     .then(user => {
@@ -84,7 +99,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  if (req.user.id !== id && req.user.role !== "admin") {
+  if (req.user.id != id && req.user.role !== "admin") {
     return res.status(403).send({ message: "You can only view your own profile." });
   }
 
@@ -110,7 +125,7 @@ exports.update = (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  if (req.user.id !== id && req.user.role !== "admin") {
+  if (req.user.id != id && req.user.role !== "admin") {
     return res.status(403).send({ message: "You can only update your own profile." });
   }
 
@@ -139,7 +154,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  if (req.user.id !== id && req.user.role !== "admin") {
+  if (req.user.id != id && req.user.role !== "admin") {
     return res.status(403).send({ message: "You can only delete your own profile." });
   }
 
