@@ -55,7 +55,7 @@ export function Login() {
 
                     {error && <b className={style.error}>{error}</b>}
 
-                    <h4><b>Don't have an account?</b></h4>
+                    <h4>Don't have an account?</h4>
 
                     <button type="button" className={style.button}>
                         Sign up
