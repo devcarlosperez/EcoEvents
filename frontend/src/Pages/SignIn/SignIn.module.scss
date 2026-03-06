@@ -2,33 +2,39 @@
 
 h3{
     font-family: 'Poppins', sans-serif;
-    text-align: center;
+   display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+img{
+  display: block;
+  width: 10%;
+  object-fit: cover;
+ justify-self: center;
+
+
 }
 .formContainer {
  font-family: sans-serif;
   display: flex;
   justify-content: left;
   margin: 203px;
+  margin-top:0;
+  
 }
 
 .contactForm {
-  margin-top: none;
   display: flex;
   flex-direction: column;
   width: 482px;
   padding: 12px;
   border-radius: 12px;
-  background-color:globals.$color_neutral_04;
-  font-family: "Roboto", sans-serif;
-  gap: 16px;
+   font-family: "Roboto", sans-serif;
+    gap: 20px;
+ 
+
 }
-.contactContainer{
-    display: flex;
-    flex-direction: row;
-    gap: 18px;
-    grid-template-columns: 1fr 1fr ;
-   
-}
+
 .button {
   padding: 6px 12px; 
   font-size: 0.9rem; 
@@ -48,4 +54,24 @@ h3{
   color:globals.$color_error;
   font-size: 0.9rem;
   margin-bottom: 10px;
+}
+.page {
+    display: flex;
+    height: 100vh;
+    
+}
+
+.leftSide {
+  display: flex;
+justify-self: center;
+}
+
+.rightSide {
+    flex: 1;
+}
+
+.rightSide img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
 }

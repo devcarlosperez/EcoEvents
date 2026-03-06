@@ -1,9 +1,11 @@
 import { useContext, useState } from "react"
 import { Input } from '../../Components/Input/input'
-import {Submit} from '../../Components/Submit/submit'
+import { Submit } from '../../Components/Submit/submit'
 import { AuthContext } from '../../Components/Context/AuthContext'
-import {Title} from '../../Components/Title/title'
-import style from'./Login.module.scss'
+import { Title } from '../../Components/Title/title'
+import style from './Login.module.scss'
+import login from '../../assets/Img/login-Img.png'
+import Logo from '../../assets/Img/Logo.svg'
 
 export function Login() {
     const [error, setError] = useState<string | null>(null)
@@ -41,18 +43,28 @@ export function Login() {
     }
 
     console.log('UserData: ', userData);
-
     return (
         <>
-          <Title text={'Login'} /> 
+         <img src={Logo} alt="" />
+            <div className={style.page}>
 
-            <div className={style.formContainer}>
-                <form className={style.contactForm} onSubmit={(e) => postLogin(e)}>
-                    <Input type="text" name="username" autoComplete="username" label="Username"></Input>
-                    <Input type="password" name="password" autoComplete="current-password" label="Password"></Input>
-                    <Submit className={style.button} value="Login"></Submit>
-                </form>
-                {error && <b className={style.error}>{error}</b>}
+                <div className={style.leftSide}>
+                    <Title text={'Login'} />
+                </div>
+                <div className={style.formContainer}>
+                    <form className={style.contactForm} onSubmit={postLogin}>
+                        <Input type="text" name="username" autoComplete="username" label="Username" />
+                        <Input type="password" name="password" autoComplete="current-password" label="Password" />
+                        <Submit className={style.button} value="Login" />
+                    </form>
+
+                    {error && <b className={style.error}>{error}</b>}
+                </div>
+
+
+                <div className={style.rightSide}>
+                    <img src={login} alt="" />
+                </div>
             </div>
         </>
     )
