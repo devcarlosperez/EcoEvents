@@ -3,7 +3,7 @@ import { Input } from '../../Components/Input/input'
 import { Submit } from '../../Components/Submit/submit'
 import { AuthContext } from '../../Components/Context/AuthContext'
 import { Title } from '../../Components/Title/title'
-import style from './SignIn.module.scss'
+import style from './SignUp.module.scss'
 import Sign from '../../assets/Img/SignUp.png'
 import Logo from '../../assets/Img/Logo.svg'
 
