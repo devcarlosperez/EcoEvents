@@ -4,14 +4,14 @@ import { Submit } from '../../Components/Submit/submit'
 import { AuthContext } from '../../Components/Context/AuthContext'
 import { Title } from '../../Components/Title/title'
 import style from './SignIn.module.scss'
-import SignIn from '../../assets/Img/SignIn.png'
+import Sign from '../../assets/Img/SignUp.png'
 import Logo from '../../assets/Img/Logo.svg'
 
-export function Signin() {
+export function SignUp() {
     const [error, setError] = useState<string | null>(null)
     const { userData, setUserData } = useContext(AuthContext)
 
-    function postSignin(e: React.FormEvent<HTMLFormElement>) {
+    function postSignUp(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
         //Gem input values
@@ -56,20 +56,20 @@ export function Signin() {
             <div className={style.page}>
 
                 <div className={style.formContainer}>
-                    <form className={style.contactForm} onSubmit={(postSignin)}>
+                    <form className={style.contactForm} onSubmit={(postSignUp)}>
                         <div className={style.contactContainer}>
                             <Input type="text" name="name" autoComplete="name" label="Name"></Input>
                             <Input type="text" name="surname" autoComplete="surname" label="SurName"></Input>
                         </div>
                         <Input type="email" name="email" autoComplete="email" label="Email"></Input>
                         <Input type="password" name="password" autoComplete="current-password" label="Password"></Input>
-                        <Submit className={style.button} value="Sign in"></Submit>
+                        <Submit className={style.button} value="Sign up"></Submit>
                     </form>
                     {error && <b className={style.error}>{error}</b>}
                 </div>
 
                 <div className={style.rightSide}>
-                    <img src={SignIn} alt="" />
+                    <img src={Sign} alt="" />
                 </div>
             </div>
         </>

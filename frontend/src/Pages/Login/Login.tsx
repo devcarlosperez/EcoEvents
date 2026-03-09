@@ -45,17 +45,19 @@ export function Login() {
     console.log('UserData: ', userData);
     return (
         <>
-         <img src={Logo} alt="" />
+        <img src={Logo} alt="" />           
+               <Title text={'Log in'} />
             <div className={style.page}>
-
-                <div className={style.leftSide}>
-                    <Title text={'Login'} />
-                </div>
+               
+            
                 <div className={style.formContainer}>
+
                     <form className={style.contactForm} onSubmit={postLogin}>
                         <Input type="text" name="username" autoComplete="username" label="Username" />
                         <Input type="password" name="password" autoComplete="current-password" label="Password" />
                         <Submit className={style.button} value="Login" />
+                        <Title text={'Create an account'} />
+                        <Submit className={style.button} value="Signup" />
                     </form>
 
                     {error && <b className={style.error}>{error}</b>}
