@@ -6,10 +6,15 @@ import { Title } from '../../Components/Title/title'
 import style from './Login.module.scss'
 import login from '../../assets/Img/login-Img.png'
 import Logo from '../../assets/Img/Logo.svg'
+import type {LoginData} from '../../Types/Auth'
+
 
 export function Login() {
     const [error, setError] = useState<string | null>(null)
     const { userData, setUserData } = useContext(AuthContext)
+
+
+ 
 
     function postLogin(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
@@ -18,12 +23,18 @@ export function Login() {
         const form = e.currentTarget
         const userName = (form.username as HTMLInputElement).value
         const passWord = (form.password as HTMLInputElement).value
+
+        const LoginData: LoginData = {
+        email: userName,      // email i typen matcher dit username felt
+        password: passWord
+    };
+   
         //Opret body (URLSearchParamms)
         const body = new URLSearchParams()
 
         //Append input values til body
-        body.append('username', userName)
-        body.append('password', passWord)
+        body.append('username', LoginData.email);
+        body.append('password', LoginData.email)
 
         const url = 'http://localhost:3000/login'
 
