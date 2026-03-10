@@ -23,7 +23,15 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
   commentObject
-    .findAll()
+    .findAll({
+      include: [
+        {
+          model: db.user,
+          as: 'author',
+          attributes: ['name', 'surname']
+        }
+      ]
+    })
     .then((data) => {
       res.send(data);
     })

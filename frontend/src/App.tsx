@@ -3,6 +3,7 @@ import { Header } from './Components/Header/Header'
 import { Footer } from './Components/Footer/Footer'
 import { Login } from './Pages/Login/Login'
 import{About} from './Pages/About/About'
+import { Event } from './Pages/Event/Event'
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/About" element={<About />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/event/:id" element={<Event />} />
       </Routes>
       <Footer />
     </BrowserRouter>
