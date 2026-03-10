@@ -1,0 +1,157 @@
+.cardContainer {
+    background-color: #f7faf8;
+    border: 1px solid #c8e6c9; // the thin green border
+    border-radius: 24px;
+    padding: 1.5rem;
+    max-width: 380px; /* Base for desktop/large screens */
+    width: 100%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+    z-index: 1;
+
+    /* Make responsive to take full width on mobile minus padding */
+    @media (max-width: 768px) {
+        max-width: 100%;
+        padding: 1.25rem;
+        border-radius: 20px;
+    }
+
+    h2 {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #1f1f1f;
+        margin-bottom: 1rem;
+    }
+}
+
+.eventImage {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+}
+
+.detailsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    color: #1f1f1f;
+
+    .detailItem {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+
+        svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+            color: #1f1f1f;
+        }
+    }
+}
+
+.description {
+    font-size: 0.8rem;
+    color: #1f1f1f;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+}
+
+.joinButton {
+    background-color: #63a4ff; // the blue infoish color
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem;
+    width: 120px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto 1.5rem;
+    transition: background-color 0.2s ease;
+
+    /* Align right on mobile as in the screenshot */
+    @media (max-width: 768px) {
+        margin: 0 0 1.5rem auto;
+    }
+
+    &:hover {
+        background-color: #4a90e2;
+    }
+}
+
+.commentsSection {
+    border-top: 1px solid #c8e6c9;
+    padding-top: 1rem;
+
+    h3 {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 0.8rem;
+        color: #1f1f1f;
+    }
+
+    .commentInput {
+        width: 100%;
+        padding: 0.6rem 1rem;
+        border: 1px solid #81c784; // green outline
+        border-radius: 20px;
+        background-color: transparent;
+        font-size: 0.8rem;
+        margin-bottom: 1.2rem;
+        color: #1f1f1f;
+
+        &::placeholder {
+            color: #5f6368;
+        }
+
+        &:focus {
+            outline: none;
+            border-color: #2e7d32;
+        }
+    }
+
+    .commentList {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        max-height: 150px;
+        overflow-y: auto;
+
+        .comment {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+
+            .commentHeader {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+
+                .avatar {
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    background-color: #4caf50; // green dot
+                }
+
+                .author {
+                    font-size: 0.8rem;
+                    font-weight: 600;
+                    color: #1f1f1f;
+                }
+            }
+
+            .text {
+                font-size: 0.75rem;
+                color: #1f1f1f;
+                line-height: 1.4;
+            }
+        }
+    }
+}

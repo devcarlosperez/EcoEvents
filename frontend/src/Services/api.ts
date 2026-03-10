@@ -8,7 +8,7 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(
-  (config) => {
+  (config: any) => {
     if (config.headers.Authorization) {
       return config;
     }
@@ -26,7 +26,7 @@ api.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
+  (error: any) => {
     return Promise.reject(error);
   }
 );

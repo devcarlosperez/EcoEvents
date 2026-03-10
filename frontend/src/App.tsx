@@ -4,6 +4,7 @@ import { Footer } from './Components/Footer/Footer'
 import { Login } from './Pages/Login/Login'
 import { About } from './Pages/About/About'
 import { CreateEvent } from './Pages/CreateEvent/CreateEvent'
+import { Event } from './Pages/Event/Event'
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <Route path="/About" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/create-event" element={<CreateEvent />} />
+        <Route path="/event/:id" element={<Event />} />
       </Routes>
       <Footer />
     </BrowserRouter>
