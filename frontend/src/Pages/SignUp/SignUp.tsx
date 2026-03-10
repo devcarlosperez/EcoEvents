@@ -14,11 +14,12 @@ export function SignUp() {
         e.preventDefault()
 
         //Gem input values
+
         const form = e.currentTarget
-        const name = (form.Name as HTMLInputElement).value
-        const surName = (form.SurName as HTMLInputElement).value
-        const email = (form.email as HTMLInputElement).value
-        const password = (form.password as HTMLInputElement).value
+        const name = (form.elements.namedItem("name") as HTMLInputElement).value
+        const surName = (form.elements.namedItem("surname") as HTMLInputElement).value
+        const email = (form.elements.namedItem("email") as HTMLInputElement).value
+        const password = (form.elements.namedItem("password") as HTMLInputElement).value
         //Opret body (URLSearchParamms)
         const body = new URLSearchParams()
 
@@ -35,7 +36,7 @@ export function SignUp() {
             .then((res) => res.json())
             .then((data) => {
                 setUserData(data)
-                setError('null')
+                setError(null)
             })
             .catch((error) => {
                 console.error(error);
@@ -53,7 +54,7 @@ export function SignUp() {
                     <div className={style.containerLogo}>
                         <img className={style.logosvg} src={Logo} alt="" />
                     </div>
-                  <h1>Create an account</h1>
+                    <h1>Create an account</h1>
 
                     <form className={style.contactForm} onSubmit={(postSignUp)}>
                         <Input type="text" name="name" autoComplete="name" label="Name"></Input>

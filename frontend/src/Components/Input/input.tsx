@@ -8,11 +8,16 @@ interface inputProps {
   autoComplete: string
 }
 
-export function Input({ label, type, name }: inputProps) {
+export function Input({ label, type, name, autoComplete }: inputProps) {
   return (
     <label className={style.inputStyle}>
       {label}
-      <input type={type} name={name} placeholder={`${name}`}></input>
+      <input 
+        type={type} 
+        name={name} 
+        autoComplete={autoComplete}
+        placeholder={name}
+      />
     </label>
   )
 }
