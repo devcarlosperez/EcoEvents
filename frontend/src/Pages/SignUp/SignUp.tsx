@@ -2,7 +2,6 @@ import { useContext, useState } from "react"
 import { Input } from '../../Components/Input/input'
 import { Submit } from '../../Components/Submit/submit'
 import { AuthContext } from '../../Components/Context/AuthContext'
-import { Title } from '../../Components/Title/title'
 import style from './SignUp.module.scss'
 import Sign from '../../assets/Img/SignUp.png'
 import Logo from '../../assets/Img/Logo.svg'
@@ -48,19 +47,17 @@ export function SignUp() {
 
     return (
         <>
-             <img src={Logo} alt="" />
-
-                <div className={style.leftSide}>
-                    <Title text={'Create an account'} />
-                </div>
             <div className={style.page}>
 
                 <div className={style.formContainer}>
+                    <div className={style.containerLogo}>
+                        <img className={style.logosvg} src={Logo} alt="" />
+                    </div>
+                  <h1>Create an account</h1>
+
                     <form className={style.contactForm} onSubmit={(postSignUp)}>
-                        <div className={style.contactContainer}>
-                            <Input type="text" name="name" autoComplete="name" label="Name"></Input>
-                            <Input type="text" name="surname" autoComplete="surname" label="SurName"></Input>
-                        </div>
+                        <Input type="text" name="name" autoComplete="name" label="Name"></Input>
+                        <Input type="text" name="surname" autoComplete="surname" label="SurName"></Input>
                         <Input type="email" name="email" autoComplete="email" label="Email"></Input>
                         <Input type="password" name="password" autoComplete="current-password" label="Password"></Input>
                         <Submit className={style.button} value="Sign up"></Submit>

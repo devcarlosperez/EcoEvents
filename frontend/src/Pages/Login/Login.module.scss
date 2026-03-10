@@ -1,41 +1,60 @@
-@use '../../Styles/globals' as globals;
-
-h3{
-  font-family: 'Poppins', sans-serif;
-  text-align: center;
+@use "../../Styles/globals" as globals;
+h1{
+  font-family: "Poppins", sans-serif;
+  font-size: 40px;
 }
 
-img{
-  display: block;
-  width: 10%;
-  object-fit: cover;
- justify-self: center;
+.h3 {
+  font-family: "Poppins", sans-serif;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 0;
+  gap: 24;
+}
+.containerLogo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.logosvg {
+  width: 185px;
+}
+
+img {
+  width: 184px;
+  height: 120px;
 }
 
 .formContainer {
- font-family: sans-serif;
+  font-family: sans-serif;
   display: flex;
-  justify-content: left;
-  margin:203px;
-  margin-top:0;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 0;
+  align-items: center;
+  gap: 24px;
 }
 
 .contactForm {
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  width: 400px;
-  padding: 12px;
+  align-items: center;
   border-radius: 12px;
-   font-family: "Roboto", sans-serif;
-  gap: 20px;
- 
+  font-family: "Roboto", sans-serif;
+  gap: 24px;
 }
 
 .button {
-  padding: 6px 12px; 
-  font-size: 0.9rem; 
-  border: none;  
-  border-radius: 6px;
+  width: 340px;
+  font-size: 16px;
+  height: 34px;
+  border: none;
+  border-radius: 14px;
   font-weight: bold;
   background-color: globals.$color_info;
   color: globals.$color_black;
@@ -47,23 +66,50 @@ img{
 }
 
 .error {
-  color:globals.$color_error;
+  color: globals.$color_error;
   font-size: 0.9rem;
   margin-bottom: 10px;
 }
 
 .page {
-    display: flex;
-    height: 100vh;
-}
-
-.rightSide {
-    flex: 1;
+  display: flex;
+  width: 100%;
+  height: 100%;
 }
 
 .rightSide img {
-  display:flex;
-    width: 100%;
-    height: 100vh;
-
+  display: flex;
+  justify-content: right;
+  width: 500px;
+  height: 100vh;
 }
+//mediaQueries
+  @media (max-width: 600px) {
+ h1{
+    font-size: 24px;
+  }
+.page {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.rightSide {
+  display: none;
+}
+.formContainer {
+  width: 100%;
+  padding: 20px;
+}
+.button {
+  width: 100%;
+  max-width: 340px;
+}
+.contactForm {
+  width: 100%;
+}
+.logosvg {
+  width: 140px;
+} 
+}
+
+ 

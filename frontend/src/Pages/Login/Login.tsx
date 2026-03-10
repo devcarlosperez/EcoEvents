@@ -2,11 +2,10 @@ import { useContext, useState } from "react"
 import { Input } from '../../Components/Input/input'
 import { Submit } from '../../Components/Submit/submit'
 import { AuthContext } from '../../Components/Context/AuthContext'
-import { Title } from '../../Components/Title/title'
 import style from './Login.module.scss'
 import login from '../../assets/Img/login-Img.png'
 import Logo from '../../assets/Img/Logo.svg'
-import type {LoginData} from '../../Types/Auth'
+import type { LoginData } from '../../Types/Auth'
 
 
 export function Login() {
@@ -14,7 +13,7 @@ export function Login() {
     const { userData, setUserData } = useContext(AuthContext)
 
 
- 
+
 
     function postLogin(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
@@ -25,10 +24,10 @@ export function Login() {
         const passWord = (form.password as HTMLInputElement).value
 
         const LoginData: LoginData = {
-        email: userName,      // email i typen matcher dit username felt
-        password: passWord
-    };
-   
+            email: userName,      // email i typen matcher dit username felt
+            password: passWord
+        };
+
         //Opret body (URLSearchParamms)
         const body = new URLSearchParams()
 
@@ -56,28 +55,30 @@ export function Login() {
     console.log('UserData: ', userData);
     return (
         <>
-        <img src={Logo} alt="" />           
-               <Title text={'Log in'} />
             <div className={style.page}>
-               
-            
+
+
                 <div className={style.formContainer}>
+                    <div className={style.containerLogo}>
+                    <img className={style.logosvg} src={Logo} alt="" />
+                    </div>
+                    <h1>Log in</h1>
 
                     <form className={style.contactForm} onSubmit={postLogin}>
                         <Input type="text" name="username" autoComplete="username" label="Username" />
                         <Input type="password" name="password" autoComplete="current-password" label="Password" />
                         <Submit className={style.button} value="Login" />
-                        <Title text={'Create an account'} />
+                        <h3 className={style.h3}>Create an account</h3>
                         <Submit className={style.button} value="Signup" />
                     </form>
 
                     {error && <b className={style.error}>{error}</b>}
                 </div>
 
-
                 <div className={style.rightSide}>
                     <img src={login} alt="" />
                 </div>
+
             </div>
         </>
     )
