@@ -1,0 +1,25 @@
+import api from "./api";
+
+export const getAllEvents = (): Promise<any> => api.get("/events").then((res: any) => res.data);
+
+export const getEventById = (id: string | number): Promise<any> =>
+  api.get(`/events/${id}`).then((res: any) => res.data);
+
+export const createEvent = (eventData: any): Promise<any> =>
+  api
+    .post("/events", eventData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+    .then((res: any) => res.data);
+
+export const deleteEvent = (id: string | number): Promise<any> => api.delete(`/events/${id}`);
+
+export const updateEvent = (id: string | number, eventData: any): Promise<any> =>
+  api
+    .put(`/events/${id}`, eventData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+    .then((res: any) => res.data);
+
+export const updateEventStatus = (id: string | number, status: string): Promise<any> =>
+  api.put(`/events/status/${id}`, { status }).then((res: any) => res.data);

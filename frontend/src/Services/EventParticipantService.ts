@@ -1,0 +1,16 @@
+import api from "./api";
+
+export const getAllEventParticipants = (): Promise<any> =>
+  api.get("/event-participants").then((res: any) => res.data);
+
+export const getEventParticipantById = (id: string | number): Promise<any> =>
+  api.get(`/event-participants/${id}`).then((res: any) => res.data);
+
+export const createEventParticipant = (participantData: any): Promise<any> =>
+  api.post("/event-participants", participantData).then((res: any) => res.data);
+
+export const deleteEventParticipant = (id: string | number): Promise<any> =>
+  api.delete(`/event-participants/${id}`);
+
+export const updateEventParticipant = (id: string | number, participantData: any): Promise<any> =>
+  api.put(`/event-participants/${id}`, participantData).then((res: any) => res.data);

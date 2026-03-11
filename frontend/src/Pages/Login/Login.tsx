@@ -44,7 +44,7 @@ export function Login() {
                 setError(null)
             })
             .catch((error) => {
-                console.error('Error loggin in: ', error);
+                console.error('Error login in: ', error);
                 setError('something went wrong- try again')
 
             })

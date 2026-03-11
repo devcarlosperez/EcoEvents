@@ -1,19 +1,21 @@
-const upload = require("../services/multer.js");
-
 module.exports = app => {
   const events = require("../controllers/event.controller.js");
+  const upload = require("../middlewares/multer.js");
+  const { verifyToken, isAdmin } = require("../middlewares/auth.js");
 
-  var router = require("express").Router();
+  const router = require("express").Router();
 
-  router.post("/", upload.single('image'), events.create);
+  router.post("/", verifyToken, upload.single('image'), events.create);
 
-  router.get("/", events.findAll);
+  router.get("/", verifyToken, events.findAll);
 
-  router.get("/:id", events.findOne);
+  router.get("/:id", verifyToken, events.findOne);
 
-  router.put("/:id", upload.single('image'), events.update);
+  router.put("/:id", verifyToken, isAdmin, upload.single('image'), events.update);
 
-  router.delete("/:id", events.delete);
+  router.put("/status/:id", verifyToken, isAdmin, events.updateStatus);
+
+  router.delete("/:id", verifyToken, isAdmin, events.delete);
 
   app.use('/api/events', router);
 };
