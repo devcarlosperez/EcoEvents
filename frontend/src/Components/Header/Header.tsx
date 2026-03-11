@@ -43,7 +43,7 @@ export function Header({ isMenuOpen, setIsMenuOpen }: HeaderProps) {
       <div className="max-w-7xl mx-auto flex justify-between px-6 pt-6 pb-6">
 
         {/* Logo */}
-        <Link to="/about">
+        <Link to="/">
           <img src={headerLogo} className="hidden md:block w-auto" alt="Eco Events Logo" aria-label="Eco Events Home"/>
           <img src={headerSmall} className="w-auto md:hidden" alt="Eco Events Logo" />
         </Link>
