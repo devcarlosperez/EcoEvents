@@ -21,7 +21,7 @@ export function Footer() {
           className="absolute -top-4 -left-2 w-10 h-10"
         />
         <h2
-          className="text-[32px] font-semibold text-[#1f1f1f]"
+          className="text-[32px] font-medium text-[#1f1f1f]"
           style={{ fontFamily: 'Poppins, sans-serif' }}
         >
           Stay in Touch
