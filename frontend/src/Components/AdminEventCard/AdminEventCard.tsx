@@ -1,4 +1,4 @@
-import React from 'react';
+    import React from 'react';
 
 interface AdminEventCardProps {
     eventName?: string;
@@ -28,7 +28,7 @@ export const AdminEventCard: React.FC<AdminEventCardProps> = ({
     onDecline
 }) => {
     return (
-        <div className="bg-[#f7faf8] border border-[#81c784] rounded-[20px] p-5 max-w-[320px] w-full shadow-sm">
+        <div className="bg-[#f7faf8] border border-[#81c784] rounded-[20px] p-5 max-w-[320px] w-full shadow-sm flex flex-col">
             <h2 className="text-lg font-semibold text-[#1f1f1f] mb-3">{eventName}</h2>
             
             <img src={image} alt={eventName} className="w-full h-[120px] object-cover mb-4" />
@@ -73,7 +73,7 @@ export const AdminEventCard: React.FC<AdminEventCardProps> = ({
                 <div>Organizer Email: {organizerEmail}</div>
             </div>
 
-            <p className="text-xs text-[#1f1f1f] leading-relaxed mb-6 text-justify">
+            <p className="text-xs text-[#1f1f1f] leading-relaxed mb-6 text-justify flex-1">
                 {description}
             </p>
 
