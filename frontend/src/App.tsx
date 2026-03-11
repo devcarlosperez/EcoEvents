@@ -17,7 +17,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         
         <Route element={<Layout />}>
-          <Route path="/about" element={<About />} />
+          <Route path="/" element={<About />} />
           <Route path="/create-event" element={<CreateEvent />} />
           <Route path="/events/:id" element={<Event />} />
           {/*other pages*/}
