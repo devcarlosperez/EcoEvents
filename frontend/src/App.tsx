@@ -1,21 +1,30 @@
 import { BrowserRouter, Route, Routes} from 'react-router-dom'
-import { Header } from './Components/Header/Header'
+import { Layout } from './Layout'
 import { Login } from './Pages/Login/Login'
-import{About} from './Pages/About/About'
+import { About } from './Pages/About/About'
+import { CreateEvent } from './Pages/CreateEvent/CreateEvent'
+import { Event } from './Pages/Event/Event'
 
 function App() {
 
+
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
-        <Route path="/About" element={<About />} />
         <Route path="/login" element={<Login />} />
+        
+        <Route element={<Layout />}>
+          <Route path="/about" element={<About />} />
+          <Route path="/create-event" element={<CreateEvent />} />
+          <Route path="/events/:id" element={<Event />} />
+          {/*other pages*/}
+
+          </Route>
+
       </Routes>
     </BrowserRouter>
   )
 }
 
 export default App
-
 

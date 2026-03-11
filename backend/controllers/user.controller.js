@@ -1,10 +1,26 @@
 const db = require("../models");
 const bcrypt = require("bcryptjs");
-const userObject = db.users;
+const jwt = require("jsonwebtoken");
+const userObject = db.user;
 
 exports.login = (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith("Basic ")) {
+    return res.status(401).send({
+      message: "Missing or invalid Authorization header. Use Basic Auth."
+    });
+  }
+
+  const base64Credentials = authHeader.split(" ")[1];
+  const credentials = Buffer.from(base64Credentials, "base64").toString("utf-8");
+  const [email, password] = credentials.split(":");
+
+  if (!email || !password) {
+    return res.status(401).send({
+      message: "Invalid credentials format."
+    });
+  }
 
   userObject.findOne({ where: { email: email } })
     .then(user => {
@@ -23,12 +39,19 @@ exports.login = (req, res) => {
         });
       }
 
+      const token = jwt.sign(
+        { id: user.id, role: user.role, email: user.email },
+        process.env.JWT_SECRET,
+        { expiresIn: "24h" }
+      );
+
       res.status(200).send({
         id: user.id,
         name: user.name,
         surname: user.surname,
         email: user.email,
-        role: user.role
+        role: user.role,
+        token: token
       });
     })
     .catch(err => {
@@ -76,9 +99,16 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
+  if (req.user.id != id && req.user.role !== "admin") {
+    return res.status(403).send({ message: "You can only view your own profile." });
+  }
+
   userObject
     .findOne({ where: { id: id } })
     .then((data) => {
+      if (!data) {
+        return res.status(404).send({ message: "User not found." });
+      }
       res.send(data);
     })
     .catch((err) => {
@@ -94,6 +124,10 @@ exports.update = (req, res) => {
   const surname = req.body.surname;
   const email = req.body.email;
   const password = req.body.password;
+
+  if (req.user.id != id && req.user.role !== "admin") {
+    return res.status(403).send({ message: "You can only update your own profile." });
+  }
 
   const user = {
     name: name,
@@ -119,6 +153,10 @@ exports.update = (req, res) => {
 
 exports.delete = (req, res) => {
   const id = req.params.id;
+
+  if (req.user.id != id && req.user.role !== "admin") {
+    return res.status(403).send({ message: "You can only delete your own profile." });
+  }
 
   userObject
     .destroy({ where: { id: id } })
