@@ -15,7 +15,7 @@ function App() {
         <Route path="/About" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/create-event" element={<CreateEvent />} />
-        <Route path="/event/:id" element={<Event />} />
+        <Route path="/event/:id" element={<Event />} />      
       </Routes>
       <Footer />
     </BrowserRouter>
