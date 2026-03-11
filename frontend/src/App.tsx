@@ -1,3 +1,5 @@
+import { BrowserRouter, Route, Routes} from 'react-router-dom'
+import { Layout } from './Layout'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Header } from './Components/Header/Header'
 import { Footer } from './Components/Footer/Footer'
@@ -8,20 +10,24 @@ import { Event } from './Pages/Event/Event'
 
 function App() {
 
+
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
-        <Route path="/About" element={<About />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/create-event" element={<CreateEvent />} />
-        <Route path="/event/:id" element={<Event />} />
+        
+        <Route element={<Layout />}>
+          <Route path="/about" element={<About />} />
+          <Route path="/create-event" element={<CreateEvent />} />
+          <Route path="/event/:id" element={<Event />} />
+          {/*other pages*/}
+
+          </Route>
+
       </Routes>
-      <Footer />
     </BrowserRouter>
   )
 }
 
 export default App
-
 
