@@ -14,9 +14,6 @@ export function Login() {
     const [error, setError] = useState<string | null>(null)
     const { userData, setUserData } = useContext(AuthContext)
 
-
-
-
     function postLogin(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
