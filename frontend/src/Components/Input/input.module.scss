@@ -1,13 +1,16 @@
-.inputStyle {
-  font-size: 1.1rem;
-  input {
-    width: 100%;
-    height: 42px;
-    background-color: rgb(240, 240, 240);
-    border: solid 1px black;
-    border-radius: 8px;
+@use'../../Styles/globals' as globals;
 
-    font-size: 1rem;
-    padding-left: 4px;
-  }
+.inputStyle {
+  font-size: 16px;
+  width: 334px;
+  input {
+    width: 334px;
+    height: 34px;
+    padding-left: 12px;
+    background-color: globals.$color_secondary_02;
+    border: solid 1px globals.$color_black;
+    border-radius: 14px;
+    font-size: 16px;
+    gap: 24px;
+      }
 }

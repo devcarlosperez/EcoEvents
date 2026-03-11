@@ -1,27 +1,33 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Header } from './Components/Header/Header'
-import { Footer } from './Components/Footer/Footer'
 import { Login } from './Pages/Login/Login'
+import { SignUp } from './Pages/SignUp/SignUp'
+import { Layout } from './Layout'
 import { About } from './Pages/About/About'
 import { CreateEvent } from './Pages/CreateEvent/CreateEvent'
 import { Event } from './Pages/Event/Event'
 
 function App() {
 
+
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
-        <Route path="/About" element={<About />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/create-event" element={<CreateEvent />} />
-        <Route path="/event/:id" element={<Event />} />      
+        
+        <Route element={<Layout />}>
+          <Route path="/about" element={<About />} />
+          <Route path="/create-event" element={<CreateEvent />} />
+          <Route path="/events/:id" element={<Event />} />
+          {/*other pages*/}
+
+          </Route>
+
       </Routes>
-      <Footer />
     </BrowserRouter>
   )
 }
 
 export default App
-
 

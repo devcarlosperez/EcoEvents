@@ -1,9 +1,14 @@
-import { useContext, useState } from "react"
+import React, { useContext, useState } from "react"
 import { Input } from '../../Components/Input/input'
-import {Submit} from '../../Components/Submit/submit'
+import { Submit } from '../../Components/Submit/submit'
 import { AuthContext } from '../../Components/Context/AuthContext'
-import {Title} from '../../Components/Title/title'
-import style from'./Login.module.scss'
+import style from './Login.module.scss'
+import login from '../../assets/Img/login-Img.png'
+import Logo from '../../assets/Img/Logo.svg'
+import type { LoginData } from '../../Types/Auth'
+import { Link } from "react-router"
+
+
 
 export function Login() {
     const [error, setError] = useState<string | null>(null)
@@ -14,14 +19,20 @@ export function Login() {
 
         //Gem input values
         const form = e.currentTarget
-        const userName = (form.username as HTMLInputElement).value
-        const passWord = (form.password as HTMLInputElement).value
+        const userName = (form.elements.namedItem("username") as HTMLInputElement).value
+        const passWord = (form.elements.namedItem("password") as HTMLInputElement).value
+
+        const LoginData: LoginData = {
+            email: userName,      // email i typen matcher dit username felt
+            password: passWord
+        };
+
         //Opret body (URLSearchParamms)
         const body = new URLSearchParams()
 
         //Append input values til body
-        body.append('username', userName)
-        body.append('password', passWord)
+        body.append('username', LoginData.email);
+        body.append('password', LoginData.password);
 
         const url = 'http://localhost:3000/login'
 
@@ -30,10 +41,10 @@ export function Login() {
             .then((res) => res.json())
             .then((data) => {
                 setUserData(data)
-                setError('')
+                setError(null)
             })
             .catch((error) => {
-                console.error('Error loggin in: ', error);
+                console.error('Error login in: ', error);
                 setError('something went wrong- try again')
 
             })
@@ -41,18 +52,34 @@ export function Login() {
     }
 
     console.log('UserData: ', userData);
-
     return (
         <>
-          <Title text={'Login'} /> 
+            <div className={style.page}>
 
-            <div className={style.formContainer}>
-                <form className={style.contactForm} onSubmit={(e) => postLogin(e)}>
-                    <Input type="text" name="username" autoComplete="username" label="Username"></Input>
-                    <Input type="password" name="password" autoComplete="current-password" label="Password"></Input>
-                    <Submit className={style.button} value="Login"></Submit>
-                </form>
-                {error && <b className={style.error}>{error}</b>}
+
+                <div className={style.formContainer}>
+                    <div className={style.containerLogo}>
+                        <img className={style.logosvg} src={Logo} alt="" />
+                    </div>
+                    <h1>Log in</h1>
+
+                    <form className={style.contactForm} onSubmit={postLogin}>
+                        <Input type="text" name="username" autoComplete="username" label="Username" />
+                        <Input type="password" name="password" autoComplete="current-password" label="Password" />
+                        <Submit className={style.button} value="Login" />
+                        <h3 className={style.h3}>Create an account</h3>
+                        <Link to="/signup">
+                            <button type="button" className={style.button}>Signup</button>
+                        </Link>
+                    </form>
+
+                    {error && <b className={style.error}>{error}</b>}
+                </div>
+
+                <div className={style.rightSide}>
+                    <img src={login} alt="" />
+                </div>
+
             </div>
         </>
     )
