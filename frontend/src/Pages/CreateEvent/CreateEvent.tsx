@@ -22,13 +22,18 @@ const inputStyle = "font-roboto text-[16px] text-neutral-01 bg-transparent borde
 export function CreateEvent() {
   const [eventName, setEventName] = useState("")
   const [eventType, setEventType] = useState("")
-  const [date, setDate] = useState("")
+  const today = new Date()
+  const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(
+    today.getDate()
+  ).padStart(2, '0')}`
+  const [date, setDate] = useState(todayStr)
   const [time, setTime] = useState("")
   const [location, setLocation] = useState("")
   const [description, setDescription] = useState("")
   const [capacity, setCapacity] = useState("")
   const [photoName, setPhotoName] = useState("")
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const dateInputRef = useRef<HTMLInputElement>(null)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -72,10 +77,30 @@ export function CreateEvent() {
 
           <div className="flex flex-col gap-1">
             <span className={labelStyle}>Date</span>
-            <div className={fieldStyle}>
-              <img src={iconDate} alt="" className="w-5 h-5" />
-              <input type="text" name="date" value={date} onChange={(e) => setDate(e.target.value)} placeholder="Select Date" className={`${inputStyle}`} style={{ color: date ? "#1f1f1f" : "#5f6368" }} />
-            </div>
+              <div
+                className={fieldStyle}
+                onClick={() => {
+                  if (dateInputRef.current) {
+                    const el: any = dateInputRef.current
+                    if (typeof el.showPicker === 'function') {
+                      el.showPicker()
+                    } else {
+                      el.focus()
+                    }
+                  }
+                }}
+              >
+                <img src={iconDate} alt="" className="w-5 h-5 cursor-pointer" />
+                <input
+                  ref={dateInputRef}
+                  type="date"
+                  name="date"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                  className={`${inputStyle}`}
+                  style={{ color: date ? "#1f1f1f" : "#5f6368" }}
+                />
+              </div>
           </div>
 
           <div className="flex flex-col gap-1">
