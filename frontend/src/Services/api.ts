@@ -9,20 +9,15 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config: any) => {
-    if (config.headers.Authorization) {
+    // Check for Authorization header case-insensitively (Axios may normalize headers)
+    const existingAuth = config.headers.Authorization || config.headers.authorization;
+    if (existingAuth) {
       return config;
     }
 
-    const userData = localStorage.getItem("userData");
-    if (userData) {
-      try {
-        const parsedUserData = JSON.parse(userData);
-        if (parsedUserData.token) {
-          config.headers.Authorization = `Bearer ${parsedUserData.token}`;
-        }
-      } catch (error) {
-        console.error("Error parsing user data from local storage", error);
-      }
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },

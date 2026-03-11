@@ -1,20 +1,19 @@
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { Input } from '../../Components/Input/input'
 import { Submit } from '../../Components/Submit/submit'
-import { AuthContext } from '../../Components/Context/AuthContext'
 import style from './SignUp.module.scss'
 import Sign from '../../assets/Img/SignUp.png'
 import Logo from '../../assets/Img/Logo.svg'
+import { Link, useNavigate } from 'react-router-dom'
+import { createUser } from '../../Services/UserService'
 
 export function SignUp() {
     // State to store error messages if signup fails
     const [error, setError] = useState<string | null>(null)
-
-    // Get userData and setUserData from AuthContext to manage global user state
-    const { userData, setUserData } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     // Function called when the signup form is submitted
-    function postSignUp(e: React.FormEvent<HTMLFormElement>) {
+    async function postSignUp(e: React.FormEvent<HTMLFormElement>) {
         // Prevent page reload on form submit
         e.preventDefault()
 
@@ -27,36 +26,20 @@ export function SignUp() {
         const email = (form.elements.namedItem("email") as HTMLInputElement).value
         const password = (form.elements.namedItem("password") as HTMLInputElement).value
 
-        // Create body using URLSearchParams
-        const body = new URLSearchParams()
-
-        // Append input values to the request body
-        body.append('name', name)
-        body.append('surname', surName)
-        body.append('email', email)
-        body.append('password', password)
-
-        // Backend signup endpoint
-        const url = 'http://localhost:3000/login'
-
-        // POST request to the backend and handle response
-        fetch(url, { method: 'POST', body: body })
-            .then((res) => res.json())
-            .then((data) => {
-                // Save the returned user data globally
-                setUserData(data)
-                // Clear any previous error
-                setError(null)
+        try {
+            await createUser({
+                name: name,
+                surname: surName,
+                email: email,
+                password: password
             })
-            .catch((error) => {
-                console.error(error);
-                // Show error message to the user
-                setError('Something went wrong - try again')
-            })
+            setError(null)
+            navigate('/about')
+        } catch (error) {
+            console.error(error);
+            setError('Something went wrong - try again')
+        }
     }
-
-    // Debug: log userData to the console
-    console.log('UserData: ', userData);
 
     return (
         <>
@@ -76,13 +59,17 @@ export function SignUp() {
                     <form className={style.contactForm} onSubmit={postSignUp}>
 
                         {/* Input fields */}
-                        <Input type="text" name="name" autoComplete="name" label="Name" />
-                        <Input type="text" name="surname" autoComplete="surname" label="Surname" />
-                        <Input type="email" name="email" autoComplete="email" label="Email" />
-                        <Input type="password" name="password" autoComplete="current-password" label="Password" />
+                        <Input type="text" name="name" autoComplete="name" label="Name" required />
+                        <Input type="text" name="surname" autoComplete="surname" label="Surname" required />
+                        <Input type="email" name="email" autoComplete="email" label="Email" required />
+                        <Input type="password" name="password" autoComplete="current-password" label="Password" required />
 
                         {/* Submit button */}
                         <Submit className={style.button} value="Sign up" />
+                        <h3 className={style.h3}>Already have an account?</h3>
+                        <Link to="/login">
+                            <button type="button" className={style.button}>Login</button>
+                        </Link>
                     </form>
 
                     {/* Display error message if signup fails */}
