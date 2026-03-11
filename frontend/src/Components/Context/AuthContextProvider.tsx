@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react'
-import type { UserData } from '../../Types/types'
+import type { UserData } from '../../Types/Auth'
 import { AuthContext } from './AuthContext'
 
-// TS - interface til Provideren
+// TS - interface for the Provider
 interface AuthContextProviderInterface {
   children: React.ReactNode
 }
 
-// Her oprettes AuthContextProvider
-// Dette er den provider vi wrapper vores komponenter i, som skal have adgang til
-// alle de værdier/states vi vil bruge på tværs af appen.
+// Here the AuthContextProvider is created
+// This is the provider we wrap our components in so they can access
+// all the values/states we want to use across the entire app.
 export const AuthContextProvider = ({ children }: AuthContextProviderInterface) => {
   const [userData, setUserData] = useState<UserData | null>(null)
 
-  // et useEffect hook der kører når komponentet mounter (første load).
-  // Tjekker om vi har gemt userData i localStorage, parser den og gemmer den i userData staten
+  // A useEffect hook that runs when the component mounts (first load).
+  // It checks if we have stored userData in localStorage,
+  // parses it and saves it in the userData state.
   useEffect(() => {
     function getLocalUserState() {
       if (localStorage.getItem('userData')) {
@@ -25,7 +26,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderInterface) 
     getLocalUserState()
   }, [])
 
-  // Tjekker om userData er noget og gemmer dem i localStorage
+  // Checks if userData exists and saves it in localStorage
   useEffect(() => {
     if (userData !== null) localStorage.setItem('userData', JSON.stringify(userData))
   }, [userData])
@@ -36,6 +37,6 @@ export const AuthContextProvider = ({ children }: AuthContextProviderInterface) 
     setUserData(null)
   }
 
-  // Returner AuthContext med alle de values vi vil bruge rundt om i appen
+  // Returns AuthContext with all the values we want to use throughout the app
   return <AuthContext.Provider value={{ userData, setUserData, logout }}>{children}</AuthContext.Provider>
 }

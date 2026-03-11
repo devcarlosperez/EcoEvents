@@ -1,15 +1,20 @@
-import { Title } from "../../Components/Title/title";
-import aboutBg from "../../assets/Img/AboutBg.png";
+import { Title } from "../../Components/Title/title"
 
-function FactCard({ text }: { text: string }) {
-  return (
-    <div className="rounded-3xl border border-[#8BCB8D] bg-white/60 backdrop-blur-md p-6 text-center shadow-sm">
-      <h3 className="mb-3 text-[24px] font-medium text-[#1C241D]">Did you know?</h3>
-    <p className="text-[16px] font-normal leading-[150%] text-[#1F1F1F]">
-  {text}
-</p>
-    </div>
-  );
+
+export function About() {
+   
+    return(
+        <>
+        <div className="min-h-dvh w-screen bg-[linear-gradient(175deg,#C0DDC2_0.09%,#E8F5E9_50%,#C0DDC2_99.91%)]">
+            
+            <main>
+                <div className="flex justify-center items-center ">
+                <Title text="About Us" />
+            </div>
+            </main>
+        </div> 
+        </>
+    )
 }
 
 export function About() {

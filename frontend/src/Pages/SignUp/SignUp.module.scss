@@ -1,13 +1,8 @@
-@use "../../Styles/globals" as globals;
+@use '../../Styles/globals' as globals;
 
 h1{
   font-family: "Poppins", sans-serif;
   font-size: 40px;
-}
-
-.h3 {
-  font-family: "Poppins", sans-serif;
-  font-size: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,7 +25,7 @@ img {
 }
 
 .formContainer {
-  font-family: sans-serif;
+  font-family: "Roboto", sans-serif;
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -68,49 +63,35 @@ img {
 
 .error {
   color: globals.$color_error;
-  font-size: 0.9rem;
+  font-size: 16px;
   margin-bottom: 10px;
 }
 
 .page {
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
 .rightSide img {
   display: flex;
   justify-content: right;
   width: 500px;
-  height: 100vh;
+  height:100%;
+  object-fit: cover;
 }
 //mediaQueries
-  @media (max-width: 600px) {
- h1{
+ @media (max-width: 600px) {
+  h1{
     font-size: 24px;
   }
-.page {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.rightSide {
+  h3{
+    font-size: 18px;
+  }
+ .page{
+grid-template-columns: repeat(1);
+ }
+.rightSide img{
   display: none;
-}
-.formContainer {
-  width: 100%;
-  padding: 20px;
-}
-.button {
-  width: 100%;
-  max-width: 340px;
-}
-.contactForm {
-  width: 100%;
-}
-.logosvg {
-  width: 140px;
-} 
-}
-
+}}
  
