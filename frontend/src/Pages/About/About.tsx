@@ -30,7 +30,7 @@ export function About() {
           <Title text="About Us" />
         </div>
 
-        <div className="mx-auto max-w-2xl -skew-x-8 rounded-[28px] border border-[#8BCB8D] bg-[#F3FAF0]/30 shadow-lg backdrop-blur-md px-[14px] py-[14px] sm:px-10 sm:py-10 text-center">
+        <div className="mx-auto max-w-2xl -skew-x-8 rounded-[28px] border border-[#8BCB8D] bg-[#F3FAF0]/30 shadow-lg backdrop-blur-md px-3.5 py-3.5 sm:px-10 sm:py-10 text-center">
           <p className="text-[20px] leading-8 text-[#1C241D]">
             EcoEvents is a community web application created to make it easier
             for people to take action and help protect the environment.
