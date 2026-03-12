@@ -4,7 +4,7 @@ import aboutBg from "../../assets/Img/AboutBg.png";
 function FactCard({ text }: { text: string }) {
   return (
     <div className="rounded-3xl border border-[#8BCB8D] bg-white/60 backdrop-blur-md p-6 text-center shadow-sm">
-      <h3 className="mb-3 text-[24px] font-medium text-[#1C241D]">Did you know?</h3>
+      <h3 className="mb-3 text-[20px] sm:text-[18px] font-medium text-[#1C241D]">Did you know?</h3>
     <p className="text-[16px] font-normal leading-[150%] text-[#1F1F1F]">
   {text}
 </p>
@@ -30,13 +30,13 @@ export function About() {
           <Title text="About Us" />
         </div>
 
-        <div className="mx-auto max-w-2xl -skew-x-8 rounded-[28px] border border-[#8BCB8D] bg-[#F3FAF0]/30 shadow-lg backdrop-blur-md px-3.5 py-3.5 sm:px-10 sm:py-10 text-center">
-          <p className="text-[20px] leading-8 text-[#1C241D]">
+        <div className="mx-[24px] sm:mx-auto max-w-2xl -skew-x-8 rounded-[28px] border border-[#8BCB8D] bg-[#F3FAF0]/30 shadow-lg backdrop-blur-md px-3.5 py-3.5 sm:px-10 sm:py-10 text-center">
+          <p className="text-[16px] leading-8 text-[#1C241D]">
             EcoEvents is a community web application created to make it easier
             for people to take action and help protect the environment.
           </p>
 
-          <p className="mt-2 md:mt-8 text-[20px] leading-8 text-[#1C241D]">
+          <p className="text-[16px] leading-8 text-[#1C241D]">
             Our mission is simple: connect individuals who care about the
             planet and give them the tools to organize and participate in
             meaningful environmental activities.
@@ -49,7 +49,7 @@ export function About() {
         </div>
 
         {/* Facts cards */}
-        <div className="grid gap-24 md:grid-cols-3 mb-19">
+        <div className="grid gap-12  sm:gap-6 md:grid-cols-3 mb-19">
           <FactCard text="Healthy forests help fight climate change by absorbing carbon dioxide from the atmosphere and storing it in trees and soil." />
 
           <FactCard text="Small actions like joining local cleanups or reducing waste can collectively reduce environmental impact and support climate action." />

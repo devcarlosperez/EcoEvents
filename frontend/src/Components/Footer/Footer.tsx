@@ -18,17 +18,17 @@ export function Footer() {
         <img
           src={FaviconIcon}
           alt=""
-          className="absolute -top-4 -left-2 w-10 h-10"
+          className="absolute -top-2 -left-1 w-6 h-6"
         />
         <h2
-          className="text-[32px] font-medium text-[#1f1f1f]"
+          className="text-[20px] font-medium text-[#1f1f1f]"
           style={{ fontFamily: 'Poppins, sans-serif' }}
         >
           Stay in Touch
         </h2>
       </div>
 
-      <nav className="flex items-center gap-[44px]" aria-label="Social media links">
+      <nav className="flex items-center gap-[24px]" aria-label="Social media links">
         {socialMediaLinks.map((social) => (
           <a
             key={social.name}
@@ -38,7 +38,7 @@ export function Footer() {
             aria-label={social.name}
             className="transition-opacity hover:opacity-70"
           >
-            <img src={social.icon} alt={social.name} className="w-7 h-7" />
+            <img src={social.icon} alt={social.name} className="w-6 h-6" />
           </a>
         ))}
       </nav>

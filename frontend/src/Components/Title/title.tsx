@@ -9,14 +9,14 @@ export function Title({ text }: TitleProps) {
     <h3
       className="
         font-poppins
-        text-[24px]          /* mobile */
+        sm:text-[20px]          /* mobile */
         font-medium
         text-center
         leading-normal
-        text-[#1F1F1F)]
-        md:text-[40px]       /* desktop */
-        mt-19
-        mb-12
+        text-[#1F1F1F]
+        md:text-[28px]       /* desktop */
+        pt-19
+        pb-12
       " >
       {text}
     </h3>

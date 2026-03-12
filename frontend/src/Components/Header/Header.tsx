@@ -44,12 +44,12 @@ export function Header({ isMenuOpen, setIsMenuOpen }: HeaderProps) {
 
         {/* Logo */}
         <Link to="/about">
-          <img src={headerLogo} className="hidden md:block w-auto" alt="Eco Events Logo" aria-label="Eco Events Home"/>
+          <img src={headerLogo} className="hidden md:block w-24" alt="Eco Events Logo" aria-label="Eco Events Home"/>
           <img src={headerSmall} className="w-auto md:hidden" alt="Eco Events Logo" />
         </Link>
 
         {/* Desktop navigation */}
-        <nav className="flex gap-10 font-medium pt-6.25 text-[32px] text-textDark no-underline" aria-label="Main navigation" style={{ fontFamily: 'Poppins, sans-serif' }}>
+        <nav className="flex gap-10 font-medium pt-6.25 text-[16px] text-textDark no-underline" aria-label="Main navigation" style={{ fontFamily: 'Poppins, sans-serif' }}>
           <div className="hidden md:flex gap-10">
             <Link to="/events" aria-label='Go to Events page'>Events</Link>
             <Link to="/create-event" aria-label="Go to Create Event page" >Create Event</Link>
@@ -87,7 +87,7 @@ export function Header({ isMenuOpen, setIsMenuOpen }: HeaderProps) {
               <div className="border-b border-white my-6"></div>
 
               {/* Mobile links */}
-              <nav className="flex flex-col gap-4 text-white text-[20px] px-6 pt-14">
+              <nav className="flex flex-col gap-4 text-white text-[18px] px-6 pt-14">
                 <Link to="/events" onClick={() => setIsMenuOpen(false)}>Events</Link>
                 <Link to="/create-event" onClick={() => setIsMenuOpen(false)}>Create Event</Link>
                 {userData?.role === 'admin' && <Link to="/admin" onClick={() => setIsMenuOpen(false)}>Admin</Link>}
@@ -96,7 +96,7 @@ export function Header({ isMenuOpen, setIsMenuOpen }: HeaderProps) {
 
               {/* Social footer */}
               <div className="fixed bottom-8 px-6 flex flex-col gap-4">
-                <h2 className="text-[20px] font-medium text-white">Stay in Touch</h2>
+                <h2 className="text-[18px] font-medium text-white">Stay in Touch</h2>
                 <nav className="flex gap-6"  aria-label="Social media links">
                   {socialMediaLinks.map((social) => (
                     <a 
