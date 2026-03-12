@@ -16,6 +16,7 @@ const eventTypeOptions = [
   { value: "cleaning", label: "Cleaning" },
   { value: "planting", label: "Planting" },
   { value: "awareness", label: "Awareness" },
+  { value: "other", label: "Other" },
 ]
 
 const labelStyle = "font-roboto text-[16px] text-neutral-01"
