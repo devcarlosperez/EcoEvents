@@ -6,6 +6,7 @@ import { About } from './Pages/About/About'
 import { CreateEvent } from './Pages/CreateEvent/CreateEvent'
 import { Event } from './Pages/Event/Event'
 import { Admin } from './Pages/Admin/Admin'
+import { NotFound } from './Pages/NotFound/NotFound'
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
         <Route path="/events/:id" element={<Event/>} />
         <Route path="/admin" element={<Admin />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )

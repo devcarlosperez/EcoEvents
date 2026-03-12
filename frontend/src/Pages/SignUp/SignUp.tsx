@@ -34,7 +34,7 @@ export function SignUp() {
                 password: password
             })
             setError(null)
-            navigate('/about')
+            navigate('/login')
         } catch (error) {
             console.error(error);
             setError('Something went wrong - try again')
