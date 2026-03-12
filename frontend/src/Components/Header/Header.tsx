@@ -12,10 +12,10 @@ import FacebookIcon from '../../assets/Img/Facebook.svg';
 import YoutubeIcon from '../../assets/Img/Youtube.svg';
 
 const socialMediaLinks = [
-  { name: 'Twitter', icon: TwitterIcon },
-  { name: 'Instagram', icon: InstagramIcon },
-  { name: 'Facebook', icon: FacebookIcon },
-  { name: 'YouTube', icon: YoutubeIcon },
+  { name: 'Twitter', icon: TwitterIcon, url: 'https://x.com/EcoEventsGC' },
+  { name: 'Instagram', icon: InstagramIcon, url: 'https://www.instagram.com/eco_eventsgc/' },
+  { name: 'Facebook', icon: FacebookIcon, url: 'https://www.facebook.com/profile.php?id=61586499163420' },
+  { name: 'YouTube', icon: YoutubeIcon, url: 'https://www.youtube.com/@EcoEventsGC' },
 ];
 
 type HeaderProps = {
@@ -99,13 +99,22 @@ export function Header({ isMenuOpen, setIsMenuOpen }: HeaderProps) {
                 <h2 className="text-[20px] font-medium text-white">Stay in Touch</h2>
                 <nav className="flex gap-6"  aria-label="Social media links">
                   {socialMediaLinks.map((social) => (
-                    <a key={social.name} className="hover:opacity-70">
+                    <a 
+                      key={social.name}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.name}
+                      className="hover:opacity-70"
+                    > 
                       <img
-                        src={social.icon}
-                        alt={social.name}
+                        src={social.icon} alt={social.name}
                         className="w-4 h-4 invert brightness-0"
                       />
                     </a>
+                     
+                      
+                     
                   ))}
                 </nav>
               </div>
