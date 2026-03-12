@@ -5,17 +5,26 @@ import iconDate from '../../assets/Img/icon-input-date.svg';
 import iconTime from '../../assets/Img/icon-input-time.svg';
 import iconLocation from '../../assets/Img/icon-input-location.svg';
 import iconCapacity from '../../assets/Img/icon-input-capacity-1.svg';
+import { formatDate } from '../../Utils/formatDate';
 
 const dummyImage = 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2670&auto=format&fit=crop';
+
+function resolveImageUrl(image_url?: string): string {
+    if (!image_url) return dummyImage;
+    if (image_url.startsWith('http://') || image_url.startsWith('https://')) return image_url;
+    return `http://localhost:8000/images/${image_url}`;
+}
 
 interface EventDetailsProps {
     event: any;
     comments: any[];
     participantsCount: number;
+    isJoined?: boolean;
+    onToggleJoin?: () => void;
 }
 
-export const EventDetails: React.FC<EventDetailsProps> = ({ event, comments, participantsCount }) => {
-    const defaultImage = event.image_url ? `http://localhost:3000/images/${event.image_url}` : dummyImage;
+export const EventDetails: React.FC<EventDetailsProps> = ({ event, comments, participantsCount, isJoined = false, onToggleJoin }) => {
+    const defaultImage = resolveImageUrl(event.image_url);
     const [commentText, setCommentText] = useState("");
     const [localComments, setLocalComments] = useState(comments);
 
@@ -63,7 +72,7 @@ export const EventDetails: React.FC<EventDetailsProps> = ({ event, comments, par
             <div className={styles.detailsGrid}>
                 <div className={styles.detailItem}>
                     <img src={iconDate} alt="date" />
-                    <span>{event.event_date}</span>
+                    <span>{formatDate(event.event_date)}</span>
                 </div>
                 <div className={styles.detailItem}>
                     <img src={iconTime} alt="time" />
@@ -81,7 +90,12 @@ export const EventDetails: React.FC<EventDetailsProps> = ({ event, comments, par
 
             <p className={styles.description}>{event.description}</p>
 
-            <button className={styles.joinButton}>Join</button>
+            <button
+                className={styles.joinButton}
+                onClick={onToggleJoin}
+            >
+                {isJoined ? 'Leave' : 'Join'}
+            </button>
 
             <div className={styles.commentsSection}>
                 <h3>Comments ({localComments.length})</h3>
