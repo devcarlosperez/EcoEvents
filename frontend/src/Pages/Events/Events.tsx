@@ -8,6 +8,7 @@ import {
   getAllEventParticipants,
 } from '../../Services/EventParticipantService'
 import { formatDate } from '../../Utils/formatDate'
+import { Title } from '../../Components/Title/title'
 
 export const Events: React.FC = () => {
   const { userData } = useContext(AuthContext)
@@ -71,16 +72,16 @@ export const Events: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#dbebe1] flex flex-col items-center px-8 py-16">
-        <h1 className="font-roboto text-4xl font-bold text-[#1a3c2e] mb-8">Events</h1>
+      <div className="min-h-screen bg-[linear-gradient(175deg,#C0DDC2_0.09%,#E8F5E9_50%,#C0DDC2_99.91%)] flex flex-col items-center px-8">
+        <Title text="Events" />
         <p className="font-roboto text-lg text-neutral-500 mt-8">Loading events...</p>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-[#dbebe1] flex flex-col items-center px-8 py-16">
-      <h1 className="font-roboto text-4xl font-bold text-[#1a3c2e] mb-8">Events</h1>
+    <div className="min-h-screen bg-[linear-gradient(175deg,#C0DDC2_0.09%,#E8F5E9_50%,#C0DDC2_99.91%)] flex flex-col items-center px-8">
+      <Title text="Events" />
       {events.length === 0 ? (
         <p className="font-roboto text-lg text-neutral-500 mt-8">No events available.</p>
       ) : (

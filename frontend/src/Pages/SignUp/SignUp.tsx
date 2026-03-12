@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Input } from '../../Components/Input/input'
 import { Submit } from '../../Components/Submit/submit'
+import { Title } from '../../Components/Title/title'
 import style from './SignUp.module.scss'
 import Sign from '../../assets/Img/SignUp.png'
 import Logo from '../../assets/Img/Logo.svg'
@@ -53,7 +54,7 @@ export function SignUp() {
                         <img className={style.logosvg} src={Logo} alt="Logo" />
                     </div>
 
-                    <h1>Create an account</h1>
+                    <Title text="Create an account" />
 
                     {/* Signup form */}
                     <form className={style.contactForm} onSubmit={postSignUp}>

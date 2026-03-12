@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen text-center px-4">
+    <div className="flex flex-col items-center justify-center min-h-screen text-center px-4 bg-[linear-gradient(175deg,#C0DDC2_0.09%,#E8F5E9_50%,#C0DDC2_99.91%)]">
       <h1 className="font-poppins font-semibold text-[6rem] text-neutral-01 leading-none">
         404
       </h1>

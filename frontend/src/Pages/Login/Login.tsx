@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react"
 import { Input } from '../../Components/Input/input'
 import { Submit } from '../../Components/Submit/submit'
+import { Title } from '../../Components/Title/title'
 import { AuthContext } from '../../Components/Context/AuthContext'
 import style from './Login.module.scss'
 import loginImg from '../../assets/Img/login-Img.png'
@@ -41,7 +42,7 @@ export function Login() {
                     <div className={style.containerLogo}>
                         <img className={style.logosvg} src={Logo} alt="" />
                     </div>
-                    <h1>Log in</h1>
+                    <Title text="Log in" />
 
                     <form className={style.contactForm} onSubmit={postLogin}>
                         <Input type="email" name="username" autoComplete="email" label="Email" placeholder="Email" />

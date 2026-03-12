@@ -6,6 +6,7 @@ import { getEventById } from '../../Services/EventService';
 import { getAllComments } from '../../Services/CommentService';
 import { getAllEventParticipants, createEventParticipant, deleteEventParticipant } from '../../Services/EventParticipantService';
 import { AuthContext } from '../../Components/Context/AuthContext';
+import { Title } from '../../Components/Title/title';
 
 export const Event: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -72,16 +73,16 @@ export const Event: React.FC = () => {
     };
 
     if (loading) {
-        return <div className={styles.eventPage}><h1 className={styles.title}>Loading Event...</h1></div>;
+        return <div className={styles.eventPage}><Title text="Loading Event..." /></div>;
     }
 
     if (!event) {
-        return <div className={styles.eventPage}><h1 className={styles.title}>Event not found</h1></div>;
+        return <div className={styles.eventPage}><Title text="Event not found" /></div>;
     }
 
     return (
         <div className={styles.eventPage}>
-            <h1 className={styles.title}>Event</h1>
+            <Title text="Event" />
             <EventDetails 
                 event={event} 
                 comments={comments} 
