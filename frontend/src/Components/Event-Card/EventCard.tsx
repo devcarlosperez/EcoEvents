@@ -2,6 +2,12 @@ import { useNavigate } from "react-router-dom"
 import iconLocation from "../../assets/Img/icon-input-location.svg"
 import iconDate from "../../assets/Img/icon-input-date.svg"
 
+function resolveImageUrl(image_url?: string): string {
+  if (!image_url) return ''
+  if (image_url.startsWith('http://') || image_url.startsWith('https://')) return image_url
+  return `http://localhost:8000/images/${image_url}`
+}
+
 interface EventCardProps {
   id: number
   name: string
@@ -27,7 +33,7 @@ export function EventCard({
 
   return (
     <div
-      onClick={() => navigate(`/event/${id}`)}
+      onClick={() => navigate(`/events/${id}`)}
       className={`flex flex-col w-full max-w-[354px] rounded-[45px] bg-white/60 p-8 transition-all cursor-pointer hover:shadow-md ${
         isJoined ? "border-2 border-[#2e7d32]" : "border border-[#dadce0]"
       }`}
@@ -37,7 +43,7 @@ export function EventCard({
       </h3>
 
       <img
-        src={image_url}
+        src={resolveImageUrl(image_url)}
         alt={name}
         className="w-full h-[126px] object-cover rounded-[15px] mt-4"
       />
