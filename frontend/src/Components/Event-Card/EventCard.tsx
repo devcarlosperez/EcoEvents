@@ -37,6 +37,7 @@ export function EventCard({
       className={`flex flex-col w-full max-w-[354px] rounded-[45px] bg-white/60 p-8 transition-all cursor-pointer hover:shadow-md ${
         isJoined ? "border-2 border-[#2e7d32]" : "border border-[#dadce0]"
       }`}
+      style={{minHeight: '100%'}}
     >
       <h3 className="font-roboto font-medium text-xl text-neutral-01">
         {name}
@@ -59,7 +60,7 @@ export function EventCard({
         </div>
       </div>
 
-      <p className="font-roboto text-base text-neutral-01 leading-snug text-justify mt-4 line-clamp-3">
+      <p className="font-roboto text-base text-neutral-01 leading-snug text-justify mt-4 line-clamp-3 flex-1">
         {description}
       </p>
 
