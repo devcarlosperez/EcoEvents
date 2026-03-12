@@ -43,13 +43,13 @@ export function Header({ isMenuOpen, setIsMenuOpen }: HeaderProps) {
       <div className="max-w-7xl mx-auto flex justify-between px-6 pt-6 pb-6">
 
         {/* Logo */}
-        <Link to="/">
+        <Link to="/about">
           <img src={headerLogo} className="hidden md:block w-auto" alt="Eco Events Logo" aria-label="Eco Events Home"/>
           <img src={headerSmall} className="w-auto md:hidden" alt="Eco Events Logo" />
         </Link>
 
         {/* Desktop navigation */}
-        <nav className="flex gap-10 font-medium pt-6.25 text-[16px] text-textDark no-underline" aria-label="Main navigation" style={{ fontFamily: 'Poppins, sans-serif' }}>
+        <nav className="flex gap-10 font-medium pt-6.25 text-[32px] text-textDark no-underline" aria-label="Main navigation" style={{ fontFamily: 'Poppins, sans-serif' }}>
           <div className="hidden md:flex gap-10">
             <Link to="/events" aria-label='Go to Events page'>Events</Link>
             <Link to="/create-event" aria-label="Go to Create Event page" >Create Event</Link>
