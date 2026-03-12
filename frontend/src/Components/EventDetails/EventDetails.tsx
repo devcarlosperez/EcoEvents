@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './EventDetails.module.scss';
-import { createComment } from '../../Services/CommentService';
+import { createComment, updateComment, deleteComment } from '../../Services/CommentService';
 import iconDate from '../../assets/Img/icon-input-date.svg';
 import iconTime from '../../assets/Img/icon-input-time.svg';
 import iconLocation from '../../assets/Img/icon-input-location.svg';
 import iconCapacity from '../../assets/Img/icon-input-capacity-1.svg';
 import { formatDate } from '../../Utils/formatDate';
+import { AuthContext } from '../Context/AuthContext';
 
 const dummyImage = 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2670&auto=format&fit=crop';
 
@@ -24,43 +25,58 @@ interface EventDetailsProps {
 }
 
 export const EventDetails: React.FC<EventDetailsProps> = ({ event, comments, participantsCount, isJoined = false, onToggleJoin }) => {
+    const { userData } = useContext(AuthContext);
     const defaultImage = resolveImageUrl(event.image_url);
     const [commentText, setCommentText] = useState("");
     const [localComments, setLocalComments] = useState(comments);
+    const [editingId, setEditingId] = useState<number | null>(null);
+    const [editText, setEditText] = useState("");
 
     const handleCommentSubmit = async (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter' && commentText.trim() !== '') {
             try {
-                const newComment = {
-                    event_id: event.id,
-                    comment: commentText.trim()
-                };
-                const created = await createComment(newComment);
-
-                // Try to get user info from localStorage to display instantly
-                let authorName = "You";
-                let authorSurname = "";
-                const userData = localStorage.getItem("userData");
-                if (userData) {
-                    try {
-                        const parsed = JSON.parse(userData);
-                        if (parsed.user?.name) {
-                            authorName = parsed.user.name;
-                            authorSurname = parsed.user.surname || "";
-                        }
-                    } catch (e) {}
-                }
-
+                const created = await createComment({ event_id: event.id, comment: commentText.trim() });
                 const newCommentWithAuthor = {
                     ...created,
-                    author: { name: authorName, surname: authorSurname }
+                    author: userData ? { name: userData.name, surname: userData.surname } : { name: 'You', surname: '' }
                 };
-
-                setLocalComments([...localComments, newCommentWithAuthor]);
+                setLocalComments(prev => [...prev, newCommentWithAuthor]);
                 setCommentText("");
             } catch (error) {
                 console.error("Failed to post comment:", error);
             }
+        }
+    };
+
+    const handleEditStart = (comment: any) => {
+        setEditingId(comment.id);
+        setEditText(comment.comment);
+    };
+
+    const handleEditSave = async (commentId: number) => {
+        if (!editText.trim()) return;
+        try {
+            await updateComment(commentId, { comment: editText.trim() });
+            setLocalComments(prev =>
+                prev.map(c => c.id === commentId ? { ...c, comment: editText.trim() } : c)
+            );
+            setEditingId(null);
+        } catch (err) {
+            console.error("Failed to update comment:", err);
+        }
+    };
+
+    const handleEditKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, commentId: number) => {
+        if (e.key === 'Enter') handleEditSave(commentId);
+        if (e.key === 'Escape') setEditingId(null);
+    };
+
+    const handleDelete = async (commentId: number) => {
+        try {
+            await deleteComment(commentId);
+            setLocalComments(prev => prev.filter(c => c.id !== commentId));
+        } catch (err) {
+            console.error("Failed to delete comment:", err);
         }
     };
 
@@ -99,24 +115,66 @@ export const EventDetails: React.FC<EventDetailsProps> = ({ event, comments, par
 
             <div className={styles.commentsSection}>
                 <h3>Comments ({localComments.length})</h3>
-                <input 
-                    type="text" 
-                    placeholder="Write a comment... (Press Enter to post)" 
-                    className={styles.commentInput} 
+                <input
+                    type="text"
+                    placeholder="Write a comment... (Press Enter to post)"
+                    className={styles.commentInput}
                     value={commentText}
                     onChange={(e) => setCommentText(e.target.value)}
-                    onKeyPress={handleCommentSubmit}
+                    onKeyDown={handleCommentSubmit}
                 />
                 <div className={styles.commentList}>
-                    {localComments.map((comment, index) => (
-                        <div key={index} className={styles.comment}>
+                    {localComments.map((comment) => (
+                        <div key={comment.id} className={styles.comment}>
                             <div className={styles.commentHeader}>
                                 <div className={styles.avatar}></div>
                                 <div className={styles.author}>
                                     {comment.author ? `${comment.author.name} ${comment.author.surname || ''}`.trim() : 'User'}
                                 </div>
+                                {userData && (comment.user_id === userData.id || userData.role === 'admin') && (
+                                    <div className={styles.commentActions}>
+                                        {editingId === comment.id ? (
+                                            <>
+                                                <button
+                                                    className={styles.actionBtn}
+                                                    onClick={() => handleEditSave(comment.id)}
+                                                    title="Save"
+                                                >✓</button>
+                                                <button
+                                                    className={`${styles.actionBtn} ${styles.cancelBtn}`}
+                                                    onClick={() => setEditingId(null)}
+                                                    title="Cancel"
+                                                >✕</button>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <button
+                                                    className={styles.actionBtn}
+                                                    onClick={() => handleEditStart(comment)}
+                                                    title="Edit"
+                                                >✏️</button>
+                                                <button
+                                                    className={`${styles.actionBtn} ${styles.deleteBtn}`}
+                                                    onClick={() => handleDelete(comment.id)}
+                                                    title="Delete"
+                                                >🗑️</button>
+                                            </>
+                                        )}
+                                    </div>
+                                )}
                             </div>
-                            <div className={styles.text}>{comment.comment}</div>
+                            {editingId === comment.id ? (
+                                <input
+                                    type="text"
+                                    className={styles.commentInput}
+                                    value={editText}
+                                    onChange={(e) => setEditText(e.target.value)}
+                                    onKeyDown={(e) => handleEditKeyDown(e, comment.id)}
+                                    autoFocus
+                                />
+                            ) : (
+                                <div className={styles.text}>{comment.comment}</div>
+                            )}
                         </div>
                     ))}
                 </div>

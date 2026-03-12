@@ -38,6 +38,14 @@ export function CreateEvent() {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
 
+  const handleClearPhoto = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setPhotoName("")
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ""
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -140,8 +148,17 @@ export function CreateEvent() {
           <div className="flex flex-col gap-1">
             <span className={labelStyle}>Upload Photo</span>
             <div className={`${fieldStyle} justify-between cursor-pointer`} onClick={() => fileInputRef.current?.click()}>
-              <span className="font-roboto text-[16px] text-neutral-02">{photoName || "Add Photo"}</span>
-              <img src={iconUpload} alt="" className="w-5 h-5" />
+              <span className="font-roboto text-[16px] text-neutral-02 truncate flex-1">{photoName || "Add Photo"}</span>
+              {photoName ? (
+                <button
+                  type="button"
+                  onClick={handleClearPhoto}
+                  className="ml-2 text-neutral-400 hover:text-red-500 transition-colors text-lg leading-none"
+                  title="Remove photo"
+                >✕</button>
+              ) : (
+                <img src={iconUpload} alt="" className="w-5 h-5" />
+              )}
               <input ref={fileInputRef} type="file" accept="image/*" onChange={(e) => { const file = e.target.files?.[0]; if (file) setPhotoName(file.name) }} className="hidden" />
             </div>
           </div>

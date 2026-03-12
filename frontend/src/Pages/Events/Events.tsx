@@ -16,6 +16,7 @@ export const Events: React.FC = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    if (!userData) return
     const fetchData = async () => {
       try {
         setLoading(true)
@@ -23,26 +24,20 @@ export const Events: React.FC = () => {
           getAllEvents(),
           getAllEventParticipants(),
         ])
-
-        const approved = allEvents.filter((e: any) => e.status === 'approved')
-        setEvents(approved)
-
-        if (userData) {
-          const userParticipations: Record<number, number> = {}
-          allParticipants
-            .filter((p: any) => p.user_id === userData.id)
-            .forEach((p: any) => {
-              userParticipations[p.event_id] = p.id
-            })
-          setJoinedMap(userParticipations)
-        }
+        setEvents(allEvents.filter((e: any) => e.status === 'approved'))
+        const userParticipations: Record<number, number> = {}
+        allParticipants
+          .filter((p: any) => p.user_id === userData.id)
+          .forEach((p: any) => {
+            userParticipations[p.event_id] = p.id
+          })
+        setJoinedMap(userParticipations)
       } catch (err) {
         console.error('Error loading events:', err)
       } finally {
         setLoading(false)
       }
     }
-
     fetchData()
   }, [userData])
 
@@ -87,7 +82,7 @@ export const Events: React.FC = () => {
     <div className="min-h-screen bg-[#dbebe1] flex flex-col items-center px-8 py-16">
       <h1 className="font-roboto text-4xl font-bold text-[#1a3c2e] mb-8">Events</h1>
       {events.length === 0 ? (
-        <p className="font-roboto text-lg text-neutral-500 mt-8">No approved events available.</p>
+        <p className="font-roboto text-lg text-neutral-500 mt-8">No events available.</p>
       ) : (
         <div className="flex flex-wrap gap-6 justify-center w-full max-w-[1200px]">
           {events.map((event) => (
