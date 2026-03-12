@@ -3,6 +3,8 @@
 h1{
   font-family: "Poppins", sans-serif;
   font-size: 40px;
+  margin-bottom: 32px;
+
 }
 
 .h3 {
@@ -18,10 +20,12 @@ h1{
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-bottom: 32px;
 }
 
 .logosvg {
   width: 185px;
+
 }
 
 img {
@@ -54,12 +58,14 @@ img {
   width: 340px;
   font-size: 16px;
   height: 34px;
+  margin-bottom: 24px;
   border: none;
   border-radius: 14px;
   font-weight: bold;
   background-color: globals.$color_info;
   color: globals.$color_black;
   cursor: pointer;
+
 }
 
 .button:hover {
@@ -81,7 +87,7 @@ img {
 .rightSide img {
   display: flex;
   justify-content: right;
-  width: 500px;
+  width: 900px;
   height: 100vh;
 }
 //mediaQueries
