@@ -12,14 +12,15 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />}>
-        <Route path="/signup" element={<SignUp />} /
+        <Route path="/" element={<Login />}/>
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route element={<Layout />}>
         <Route path="/about" element={<About />} />
         <Route path="/create-event" element={<CreateEvent />} />
-        <Route path="/events/:id" element={<Event/>} />>
+        <Route path="/events/:id" element={<Event/>} />
         <Route path="/admin" element={<Admin />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   )
