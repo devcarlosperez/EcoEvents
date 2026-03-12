@@ -80,7 +80,7 @@ h1{
   object-fit: cover;
 }
 //mediaQueries
- @media (max-width: 600px) {
+@media (max-width: 767px)  {
   h1{
     font-size: 24px;
   }
@@ -93,4 +93,11 @@ grid-template-columns: repeat(1);
 .rightSide img{
   display: none;
 }}
- 
+ //mediaQueries tablet
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  .rightSide {
+  display: none;
+}
+
+}
