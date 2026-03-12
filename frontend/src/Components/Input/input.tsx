@@ -7,11 +7,13 @@ interface inputProps {
   name: string
   value?: string
   autoComplete: string
+  required?: boolean
+  placeholder?: string
 }
 
 // Reusable Input component
 // It receives props and renders a labeled input field
-export function Input({ label, type, name, autoComplete }: inputProps) {
+export function Input({ label, type, name, autoComplete, required, placeholder }: inputProps) {
   return (
     // Wrapper label that contains both the label text and the input field
     <label className={style.inputStyle}>
@@ -24,7 +26,8 @@ export function Input({ label, type, name, autoComplete }: inputProps) {
         type={type} 
         name={name} 
         autoComplete={autoComplete}
-        placeholder={name} // Uses the input name as placeholder text
+        placeholder={placeholder ?? name}
+        required={required}
       />
     </label>
   )

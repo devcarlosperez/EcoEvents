@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
+import { AuthContext } from '../Context/AuthContext';
 
 import headerLogo from '../../assets/Img/Logo-mobile.svg';
 import headerSmall from '../../assets/Img/LogoSmall.svg';
@@ -23,6 +24,7 @@ type HeaderProps = {
 };
 
 export function Header({ isMenuOpen, setIsMenuOpen }: HeaderProps) {
+  const { logout, userData } = useContext(AuthContext)
 
   // Close mobile menu on window resize
   useEffect(() => {
@@ -41,17 +43,18 @@ export function Header({ isMenuOpen, setIsMenuOpen }: HeaderProps) {
       <div className="max-w-7xl mx-auto flex justify-between px-6 pt-6 pb-6">
 
         {/* Logo */}
-        <Link to="/about">
+        <Link to="/">
           <img src={headerLogo} className="hidden md:block w-auto" alt="Eco Events Logo" aria-label="Eco Events Home"/>
           <img src={headerSmall} className="w-auto md:hidden" alt="Eco Events Logo" />
         </Link>
 
         {/* Desktop navigation */}
-        <nav className="flex gap-10 font-medium pt-6.25 text-[32px] text-textDark no-underline" aria-label="Main navigation" style={{ fontFamily: 'Poppins, sans-serif' }}>
+        <nav className="flex gap-10 font-medium pt-6.25 text-[16px] text-textDark no-underline" aria-label="Main navigation" style={{ fontFamily: 'Poppins, sans-serif' }}>
           <div className="hidden md:flex gap-10">
             <Link to="/events" aria-label='Go to Events page'>Events</Link>
-            <Link to="/create" aria-label="Go to Create Event page" >Create Event</Link>
-            <Link to="/logout" aria-label="Go to Logout page">Logout</Link>
+            <Link to="/create-event" aria-label="Go to Create Event page" >Create Event</Link>
+            {userData?.role === 'admin' && <Link to="/admin" aria-label="Go to Admin page">Admin</Link>}
+            <Link to="/login" onClick={logout} aria-label="Logout">Log out</Link>
           </div>
 
           {/* Mobile hamburger button */}
@@ -86,8 +89,9 @@ export function Header({ isMenuOpen, setIsMenuOpen }: HeaderProps) {
               {/* Mobile links */}
               <nav className="flex flex-col gap-4 text-white text-[20px] px-6 pt-14">
                 <Link to="/events" onClick={() => setIsMenuOpen(false)}>Events</Link>
-                <Link to="/create" onClick={() => setIsMenuOpen(false)}>Create Event</Link>
-                <Link to="/logout" onClick={() => setIsMenuOpen(false)}>Logout</Link>
+                <Link to="/create-event" onClick={() => setIsMenuOpen(false)}>Create Event</Link>
+                {userData?.role === 'admin' && <Link to="/admin" onClick={() => setIsMenuOpen(false)}>Admin</Link>}
+                <Link to="/login" onClick={() => { setIsMenuOpen(false); logout(); }} aria-label="Logout">Log out</Link>
               </nav>
 
               {/* Social footer */}

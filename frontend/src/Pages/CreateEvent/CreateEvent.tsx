@@ -1,5 +1,7 @@
 import { useRef, useState } from "react"
 import { Submit } from "../../Components/Submit/submit"
+import { createEvent } from "../../Services/EventService"
+import { useNavigate } from "react-router-dom"
 import iconDate from "../../assets/Img/icon-input-date.svg"
 import iconTime from "../../assets/Img/icon-input-time.svg"
 import iconLocation from "../../assets/Img/icon-input-location.svg"
@@ -22,16 +24,42 @@ const inputStyle = "font-roboto text-[16px] text-neutral-01 bg-transparent borde
 export function CreateEvent() {
   const [eventName, setEventName] = useState("")
   const [eventType, setEventType] = useState("")
-  const [date, setDate] = useState("")
+  const today = new Date()
+  const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(
+    today.getDate()
+  ).padStart(2, '0')}`
+  const [date, setDate] = useState(todayStr)
   const [time, setTime] = useState("")
   const [location, setLocation] = useState("")
   const [description, setDescription] = useState("")
   const [capacity, setCapacity] = useState("")
   const [photoName, setPhotoName] = useState("")
+  const [error, setError] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const navigate = useNavigate()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    const formData = new FormData()
+    formData.append('name', eventName)
+    formData.append('event_type', eventType)
+    formData.append('event_date', date)
+    formData.append('event_time', time)
+    formData.append('location', location)
+    formData.append('description', description)
+    formData.append('max_participants', capacity)
+    if (fileInputRef.current?.files?.[0]) {
+      formData.append('image', fileInputRef.current.files[0])
+    }
+
+    try {
+      await createEvent(formData)
+      navigate('/about')
+    } catch (err) {
+      console.error(err)
+      setError('Something went wrong - try again')
+    }
   }
   
   return (
@@ -54,14 +82,14 @@ export function CreateEvent() {
           <div className="flex flex-col gap-1">
             <span className={labelStyle}>Event Name</span>
             <div className={fieldStyle}>
-              <input type="text" name="eventName" value={eventName} onChange={(e) => setEventName(e.target.value)} placeholder="Enter Event Name" className={inputStyle} />
+              <input type="text" name="eventName" value={eventName} onChange={(e) => setEventName(e.target.value)} placeholder="Enter Event Name" className={inputStyle} required />
             </div>
           </div>
 
           <div className="flex flex-col gap-1">
             <span className={labelStyle}>Event Type</span>
             <div className={`${fieldStyle} relative`}>
-              <select value={eventType} onChange={(e) => setEventType(e.target.value)} className={`${inputStyle} appearance-none cursor-pointer pr-8`} style={{ color: eventType ? "#1f1f1f" : "#5f6368" }}>
+              <select value={eventType} onChange={(e) => setEventType(e.target.value)} className={`${inputStyle} appearance-none cursor-pointer pr-8`} style={{ color: eventType ? "#1f1f1f" : "#5f6368" }} required>
                 {eventTypeOptions.map((opt) => (
                   <option key={opt.value} value={opt.value}>{opt.label}</option>
                 ))}
@@ -74,7 +102,7 @@ export function CreateEvent() {
             <span className={labelStyle}>Date</span>
             <div className={fieldStyle}>
               <img src={iconDate} alt="" className="w-5 h-5" />
-              <input type="text" name="date" value={date} onChange={(e) => setDate(e.target.value)} placeholder="Select Date" className={`${inputStyle}`} style={{ color: date ? "#1f1f1f" : "#5f6368" }} />
+              <input type="date" name="date" value={date} onChange={(e) => setDate(e.target.value)} placeholder="Select Date" className={`${inputStyle}`} style={{ color: date ? "#1f1f1f" : "#5f6368" }} required />
             </div>
           </div>
 
@@ -82,7 +110,7 @@ export function CreateEvent() {
             <span className={labelStyle}>Time</span>
             <div className={fieldStyle}>
               <img src={iconTime} alt="" className="w-5 h-5" />
-              <input type="text" name="time" value={time} onChange={(e) => setTime(e.target.value)} placeholder="Select Time" className={`${inputStyle}`} style={{ color: time ? "#1f1f1f" : "#5f6368" }} />
+              <input type="time" name="time" value={time} onChange={(e) => setTime(e.target.value)} placeholder="Select Time" className={`${inputStyle}`} style={{ color: time ? "#1f1f1f" : "#5f6368" }} required />
             </div>
           </div>
 
@@ -90,14 +118,14 @@ export function CreateEvent() {
             <span className={labelStyle}>Location</span>
             <div className={fieldStyle}>
               <img src={iconLocation} alt="" className="w-5 h-5" />
-              <input type="text" name="location" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Enter Location Name" className={inputStyle} />
+              <input type="text" name="location" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Enter Location Name" className={inputStyle} required />
             </div>
           </div>
 
           <div className="flex flex-col gap-1">
             <span className={labelStyle}>Description</span>
             <div className={fieldStyle}>
-              <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder={"Describe your Event (purpose,\nactivities, etc.)"} rows={3} className={`${inputStyle} resize-none`} />
+              <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder={"Describe your Event (purpose,\nactivities, etc.)"} rows={3} className={`${inputStyle} resize-none`} required />
             </div>
           </div>
 
@@ -105,7 +133,7 @@ export function CreateEvent() {
             <span className={labelStyle}>Capacity</span>
             <div className={fieldStyle}>
               <img src={iconCapacity} alt="" className="w-5 h-5" />
-              <input type="text" value={capacity} onChange={(e) => setCapacity(e.target.value)} placeholder="Enter number of participants" className={`${inputStyle}`} style={{ color: capacity ? "#1f1f1f" : "#5f6368" }} />
+              <input type="number" value={capacity} onChange={(e) => setCapacity(e.target.value)} placeholder="Enter number of participants" className={`${inputStyle}`} style={{ color: capacity ? "#1f1f1f" : "#5f6368" }} min="1" required />
             </div>
           </div>
 
@@ -118,7 +146,8 @@ export function CreateEvent() {
             </div>
           </div>
 
-          <div className="mt-auto flex justify-center">
+          <div className="mt-auto flex flex-col items-center gap-3">
+            {error && <b className="text-red-600 text-sm">{error}</b>}
             <Submit
               value="Create"
               className="w-full py-2 bg-btn-create rounded-[13px] cursor-pointer hover:bg-btn-create-hover transition-colors font-poppins font-medium text-[24px] text-neutral-01 text-center"
