@@ -1,0 +1,16 @@
+import api from "./api";
+
+export const getAllComments = (): Promise<any> =>
+  api.get("/comments").then((res: any) => res.data);
+
+export const getCommentById = (id: string | number): Promise<any> =>
+  api.get(`/comments/${id}`).then((res: any) => res.data);
+
+export const createComment = (commentData: any): Promise<any> =>
+  api.post("/comments", commentData).then((res: any) => res.data);
+
+export const deleteComment = (id: string | number): Promise<any> =>
+  api.delete(`/comments/${id}`);
+
+export const updateComment = (id: string | number, commentData: any): Promise<any> =>
+  api.put(`/comments/${id}`, commentData).then((res: any) => res.data);

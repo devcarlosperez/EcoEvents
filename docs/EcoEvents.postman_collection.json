@@ -1,0 +1,761 @@
+{
+	"info": {
+		"_postman_id": "ecoevents-api-collection",
+		"name": "EcoEvents API",
+		"description": "Complete collection of endpoints for the EcoEvents API.\n\n**Recommended workflow:**\n1. Register a user (POST /api/users)\n2. Log in (POST /api/users/login) → copy the token\n3. Paste the token into the collection variable `token`\n4. Test the remaining authenticated endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8000/api",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Users",
+			"description": "Endpoints for user management",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Carlos",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Garcia",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "carlos@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Registers a new user with 'user' role by default."
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "carlos@example.com",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password123",
+									"type": "string"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						},
+						"description": "Logs in using Basic Auth (email:password encoded in Base64 in the Authorization header) and returns a JWT. The token is automatically saved in the collection variable."
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users (Admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Retrieves all users. Requires admin role."
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						},
+						"description": "Retrieves a user by ID. You can only view your own profile (or any profile if you are admin)."
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Carlos Updated",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Garcia Lopez",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "carlos@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "newpassword123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						},
+						"description": "Updates user data. You can only update your own profile (or any profile if you are admin)."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/users/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						},
+						"description": "Deletes a user by ID."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Events",
+			"description": "Endpoints for ecological events management",
+			"item": [
+				{
+					"name": "Create Event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Beach Cleanup",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Beach cleanup event in Valencia",
+									"type": "text"
+								},
+								{
+									"key": "event_type",
+									"value": "cleaning",
+									"description": "Values: cleaning | planting | awareness | other",
+									"type": "text"
+								},
+								{
+									"key": "event_date",
+									"value": "2026-04-15",
+									"type": "text"
+								},
+								{
+									"key": "event_time",
+									"value": "10:00",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "Malvarrosa Beach, Valencia",
+									"type": "text"
+								},
+								{
+									"key": "max_participants",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "",
+									"description": "Event image (optional)"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events"
+							]
+						},
+						"description": "Creates a new event. Uses form-data to support image upload. Event types: cleaning, planting, awareness, other."
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Events",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/events",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events"
+							]
+						},
+						"description": "Retrieves the complete list of events."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Event by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/events/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events",
+								"1"
+							]
+						},
+						"description": "Retrieves a specific event by ID."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Event (Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Updated Beach Cleanup",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Updated cleanup event",
+									"type": "text"
+								},
+								{
+									"key": "event_type",
+									"value": "cleaning",
+									"type": "text"
+								},
+								{
+									"key": "event_date",
+									"value": "2026-05-20",
+									"type": "text"
+								},
+								{
+									"key": "event_time",
+									"value": "09:00",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "Patacona Beach, Valencia",
+									"type": "text"
+								},
+								{
+									"key": "max_participants",
+									"value": "80",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "",
+									"description": "New event image (optional)"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/events/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events",
+								"1"
+							]
+						},
+						"description": "Updates an existing event. Requires admin role."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Event Status (Admin)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "approved",
+									"description": "Values: pending | approved | rejected",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/events/status/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events",
+								"status",
+								"1"
+							]
+						},
+						"description": "Changes the status of an event. Possible values: pending, approved, rejected. Requires admin role."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Event (Admin)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/events/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"events",
+								"1"
+							]
+						},
+						"description": "Deletes an event by ID. Requires admin role."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"description": "Endpoints for event comments management",
+			"item": [
+				{
+					"name": "Create Comment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "event_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "comment",
+									"value": "Great event! I'm definitely joining.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/comments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comments"
+							]
+						},
+						"description": "Creates a comment on an event. The user_id is obtained from the JWT token."
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Comments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/comments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comments"
+							]
+						},
+						"description": "Retrieves all comments."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Comment by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/comments/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comments",
+								"1"
+							]
+						},
+						"description": "Retrieves a specific comment by ID."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Comment",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "comment",
+									"value": "Updated comment: can't wait to go!",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/comments/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comments",
+								"1"
+							]
+						},
+						"description": "Updates a comment. Only the author or an admin can edit it."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Comment",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/comments/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comments",
+								"1"
+							]
+						},
+						"description": "Deletes a comment. Only the author or an admin can delete it."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Event Participants",
+			"description": "Endpoints for event participation management",
+			"item": [
+				{
+					"name": "Join Event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "event_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/event-participants",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"event-participants"
+							]
+						},
+						"description": "Registers the authenticated user as a participant in an event. The user_id is obtained from the JWT token."
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Participations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/event-participants",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"event-participants"
+							]
+						},
+						"description": "Retrieves all event participations."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Participation by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/event-participants/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"event-participants",
+								"1"
+							]
+						},
+						"description": "Retrieves a specific participation by ID."
+					},
+					"response": []
+				},
+				{
+					"name": "Update Participation (Not Allowed)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{baseUrl}}/event-participants/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"event-participants",
+								"1"
+							]
+						},
+						"description": "This endpoint always returns a 400 error. Updating participations is not allowed."
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Participation",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer "
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/event-participants/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"event-participants",
+								"1"
+							]
+						},
+						"description": "Cancels a participation. Only the participant or an admin can cancel it."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

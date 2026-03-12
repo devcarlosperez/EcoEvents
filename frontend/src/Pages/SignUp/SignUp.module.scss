@@ -1,0 +1,103 @@
+@use '../../Styles/globals' as globals;
+
+.containerLogo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.logosvg {
+  width: 96px;
+}
+
+
+.formContainer {
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 0;
+  align-items: center;
+  gap: 12px;
+}
+
+.formContainer h3 {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.contactForm {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 12px;
+  font-family: "Roboto", sans-serif;
+  gap: 12px;
+}
+
+.button {
+  width: 340px;
+  font-size: 16px;
+  height: 34px;
+  border: none;
+  border-radius: 14px;
+  font-weight: bold;
+  background-color: globals.$color_info;
+  color: globals.$color_black;
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+.error {
+  color: globals.$color_error;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.h3 {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  text-align: center;
+}
+
+.page {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.rightSide img {
+  display: flex;
+  justify-content: right;
+  width: 900px;
+  height: 100vh;
+}
+//mediaQueries
+@media (max-width: 767px)  {
+ .page{
+grid-template-columns: repeat(1);
+ }
+.rightSide img{
+  display: none;
+}
+}
+ //mediaQueries tablet
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  .rightSide {
+  display: none;
+}
+
+}
+
+@media (min-width: 768px) {
+  .logosvg {
+    width: 124px;
+  }
+}

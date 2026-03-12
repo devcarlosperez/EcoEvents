@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --font-poppins: "Poppins", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+  --color-neutral-01: #1f1f1f;
+  --color-neutral-02: #5f6368;
+  --color-field-bg: #e8f5e9;
+  --color-form-border: #52c257;
+  --color-btn-create: #6eb1ec;
+  --color-btn-create-hover: #5aa0db;
+}
+
+body {
+  font-family: var(--font-roboto);
+}
+
+input[type="date"],
+input[type="time"] {
+  position: relative;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}

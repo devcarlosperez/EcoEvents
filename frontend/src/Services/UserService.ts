@@ -1,0 +1,25 @@
+import api from "./api";
+
+export const login = (email: string, password: string): Promise<any> => {
+  const credentials = btoa(`${email}:${password}`);
+  return api
+    .post("/users/login", {}, {
+      headers: {
+        Authorization: `Basic ${credentials}`,
+      },
+    })
+    .then((res: any) => res.data);
+};
+
+export const getAllUsers = (): Promise<any> => api.get("/users").then((res: any) => res.data);
+
+export const getUserById = (id: string | number): Promise<any> =>
+  api.get(`/users/${id}`).then((res: any) => res.data);
+
+export const createUser = (userData: any): Promise<any> =>
+  api.post("/users", userData).then((res: any) => res.data);
+
+export const deleteUser = (id: string | number): Promise<any> => api.delete(`/users/${id}`);
+
+export const updateUser = (id: string | number, userData: any): Promise<any> =>
+  api.put(`/users/${id}`, userData).then((res: any) => res.data);

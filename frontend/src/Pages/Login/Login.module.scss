@@ -1,0 +1,118 @@
+@use "../../Styles/globals" as globals;
+
+.h3 {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 0;
+}
+.containerLogo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.logosvg {
+  width: 96px;
+}
+.formContainer {
+  font-family: sans-serif;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 0;
+  align-items: center;
+  gap: 16px;
+}
+
+.formContainer h3 {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.contactForm {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 12px;
+  font-family: "Roboto", sans-serif;
+  gap: 16px;
+}
+
+.button {
+  width: 340px;
+  font-size: 16px;
+  height: 34px;
+  margin-bottom: 8px;
+  border: none;
+  border-radius: 14px;
+  font-weight: bold;
+  background-color: globals.$color_info;
+  color: globals.$color_black;
+  cursor: pointer;
+
+}
+.button:hover {
+  opacity: 0.9;
+}
+
+.error {
+  color: globals.$color_error;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.page {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.rightSide img {
+  display: flex;
+  justify-content: right;
+  width: 900px;
+  height: 100vh;
+}
+//mediaQueries mobile
+@media (max-width: 767px)  {
+.page {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.rightSide {
+  display: none;
+}
+.formContainer {
+  width: 100%;
+  padding: 20px;
+}
+.button {
+  width: 100%;
+  width: 340px;
+}
+.contactForm {
+  width: 100%;
+}
+}
+ //mediaQueries tablet
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  .rightSide {
+  display: none;
+}
+
+}
+
+@media (min-width: 768px) {
+  .logosvg {
+    width: 124px;
+  }
+}
+ 
