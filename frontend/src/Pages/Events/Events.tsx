@@ -80,7 +80,7 @@ export const Events: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(175deg,#C0DDC2_0.09%,#E8F5E9_50%,#C0DDC2_99.91%)] flex flex-col items-center px-8">
+    <div className="min-h-screen bg-[linear-gradient(175deg,#C0DDC2_0.09%,#E8F5E9_50%,#C0DDC2_99.91%)] flex flex-col items-center px-8 pb-20">
       <Title text="Events" />
       {events.length === 0 ? (
         <p className="font-roboto text-lg text-neutral-500 mt-8">No events available.</p>
