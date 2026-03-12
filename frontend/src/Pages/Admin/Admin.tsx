@@ -9,6 +9,7 @@ function resolveImageUrl(image_url?: string | null): string | undefined {
   if (image_url.startsWith('http://') || image_url.startsWith('https://')) return image_url
   return `http://localhost:8000/images/${image_url}`
 }
+import { Title } from "../../Components/Title/title"
 
 interface EventData {
   id: number
@@ -80,12 +81,10 @@ export function Admin() {
 
   return (
     <div className="min-h-screen bg-[linear-gradient(175deg,#C0DDC2_0.09%,#E8F5E9_50%,#C0DDC2_99.91%)]">
-      <h1
-        className="font-poppins font-medium text-[40px] text-neutral-01 text-center"
-        style={{ paddingTop: 48, paddingBottom: 48 }}
-      >
-        Event Request
-      </h1>
+      <div >
+        <Title text="Event Request"/>
+      </div>
+     
 
       <div className="flex flex-wrap justify-center gap-8 px-6 pb-16">
         {events.length === 0 && (

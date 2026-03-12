@@ -9,6 +9,7 @@ import iconCapacity from "../../assets/Img/icon-input-capacity-1.svg"
 import iconUpload from "../../assets/Img/icon-input-upload-photo.svg"
 import iconEventType from "../../assets/Img/icon-input-event-type.svg"
 import bg from "../../assets/Img/background-create-event.png"
+import { Title } from "../../Components/Title/title"
 
 const eventTypeOptions = [
   { value: "", label: "Select Event Type" },
@@ -73,19 +74,13 @@ export function CreateEvent() {
   return (
     <div className="relative flex flex-col items-center bg-[linear-gradient(175deg,#C0DDC2_0.09%,#E8F5E9_50%,#C0DDC2_99.91%)]">
       <img src={bg} alt="bg" className="absolute bottom-0 right-0 object-cover pointer-events-none" style={{ width: 766, height: 729 }} />
-      <h1
-        className="z-20 font-poppins font-medium text-[40px] text-neutral-01 text-center"
-        style={{ marginTop: 76, marginBottom: 48 }}
-      >
-        Create Event
-      </h1>
-
+      <Title text="Create Event" />
       <form
         onSubmit={handleSubmit}
         className="z-20 flex flex-col bg-white/60 rounded-[45px] border border-form-border backdrop-blur-sm"
-        style={{ width: 354, minHeight: 932, padding: "24px 26px", marginBottom: 74 }}
+        style={{ width: 354, padding: "24px 26px", marginBottom: 74 }}
       >
-        <div className="flex flex-col h-full" style={{ gap: 24 }}>
+        <div className="flex flex-col h-full" style={{ gap: 14 }}>
 
           <div className="flex flex-col gap-1">
             <span className={labelStyle}>Event Name</span>
@@ -163,7 +158,7 @@ export function CreateEvent() {
             </div>
           </div>
 
-          <div className="mt-auto flex flex-col items-center gap-3">
+          <div className="mt-[18px] flex flex-col items-center gap-3">
             {error && <b className="text-red-600 text-sm">{error}</b>}
             <Submit
               value="Create"
