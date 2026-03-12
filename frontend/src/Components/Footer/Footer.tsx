@@ -2,7 +2,7 @@ import TwitterIcon from '../../assets/Img/Twitter.svg'
 import InstagramIcon from '../../assets/Img/Instagram.svg'
 import FacebookIcon from '../../assets/Img/Facebook.svg'
 import YoutubeIcon from '../../assets/Img/Youtube.svg'
-import FaviconIcon from '../../../public/favicon.svg'
+import FaviconIcon from '../../assets/Img/favicon.svg'
 
 const socialMediaLinks = [
   { name: 'Twitter', icon: TwitterIcon, url: 'https://x.com/EcoEventsGC' },

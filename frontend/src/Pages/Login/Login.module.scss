@@ -27,8 +27,6 @@ h1{
   width: 185px;
 
 }
-
-
 .formContainer {
   font-family: sans-serif;
   display: flex;
@@ -63,7 +61,6 @@ h1{
   cursor: pointer;
 
 }
-
 .button:hover {
   opacity: 0.9;
 }
@@ -86,8 +83,8 @@ h1{
   width: 900px;
   height: 100vh;
 }
-//mediaQueries
-  @media (max-width: 600px) {
+//mediaQueries mobile
+@media (max-width: 767px)  {
  h1{
     font-size: 24px;
   }
@@ -114,5 +111,12 @@ h1{
   width: 140px;
 } 
 }
+ //mediaQueries tablet
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  .rightSide {
+  display: none;
+}
 
+}
  
