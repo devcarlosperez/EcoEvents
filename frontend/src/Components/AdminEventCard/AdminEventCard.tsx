@@ -28,7 +28,7 @@ export const AdminEventCard: React.FC<AdminEventCardProps> = ({
     onDecline
 }) => {
     return (
-        <div className="bg-[#f7faf8] border border-[#81c784] rounded-[20px] p-5 max-w-[320px] w-full shadow-sm flex flex-col">
+        <div style={{minHeight: '100%'}} className="bg-[#f7faf8] border border-[#81c784] rounded-[20px] p-5 max-w-[320px] w-full shadow-sm flex flex-col">
             <h2 className="text-lg font-semibold text-[#1f1f1f] mb-3">{eventName}</h2>
             
             <img src={image} alt={eventName} className="w-full h-[120px] object-cover mb-4" />
@@ -73,19 +73,19 @@ export const AdminEventCard: React.FC<AdminEventCardProps> = ({
                 <div>Organizer Email: {organizerEmail}</div>
             </div>
 
-            <p className="text-xs text-[#1f1f1f] leading-relaxed mb-6 text-justify flex-1">
+            <p className="text-xs text-[#1f1f1f] leading-relaxed mb-6 text-justify flex-1 line-clamp-3">
                 {description}
             </p>
 
             <div className="flex gap-4">
                 <button 
-                    className="flex-1 py-2.5 rounded-lg font-semibold text-sm text-[#1a1a1a] transition-colors duration-200 bg-[#63a4ff] hover:bg-[#4a90e2]" 
+                    className="flex-1 py-2.5 rounded-lg font-semibold text-sm text-[#1a1a1a] transition-colors duration-200 bg-[#63a4ff] hover:bg-[#4a90e2] cursor-pointer" 
                     onClick={onApprove}
                 >
                     Approve
                 </button>
                 <button 
-                    className="flex-1 py-2.5 rounded-lg font-semibold text-sm text-[#1a1a1a] transition-colors duration-200 bg-[#abcbf1] hover:bg-[#92b9e6]" 
+                    className="flex-1 py-2.5 rounded-lg font-semibold text-sm text-[#1a1a1a] transition-colors duration-200 bg-[#abcbf1] hover:bg-[#92b9e6] cursor-pointer" 
                     onClick={onDecline}
                 >
                     Decline

@@ -67,10 +67,8 @@ export function EventCard({
       <div className="flex justify-end mt-4">
         <button
           onClick={(e) => { e.stopPropagation(); onToggleJoin?.(id) }}
-          className={`w-[121px] h-[42px] flex items-center justify-center rounded-[13px] font-poppins font-medium text-xl cursor-pointer transition-colors ${
-            isJoined
-              ? "bg-[#b3d4f0] text-neutral-01 hover:bg-[#9bc4e6]"
-              : "bg-[#6eb1ec] text-neutral-01 hover:bg-[#5aa0db]"
+          className={`w-[121px] h-[42px] flex items-center justify-center rounded-[13px] font-poppins font-medium text-[18px] cursor-pointer transition-colors ${
+            "bg-btn-create text-neutral-01 hover:bg-btn-create-hover"
           }`}
         >
           {isJoined ? "Leave" : "Join"}
