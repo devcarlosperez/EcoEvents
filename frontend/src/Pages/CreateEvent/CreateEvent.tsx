@@ -162,7 +162,7 @@ export function CreateEvent() {
             {error && <b className="text-red-600 text-sm">{error}</b>}
             <Submit
               value="Create"
-              className="w-full py-2 bg-btn-create rounded-[13px] cursor-pointer hover:bg-btn-create-hover transition-colors font-poppins font-medium text-[24px] text-neutral-01 text-center"
+              className="w-full py-2 bg-btn-create rounded-[13px] cursor-pointer hover:bg-btn-create-hover transition-colors font-poppins font-medium text-[18px] text-neutral-01 text-center"
             />
           </div>
         </div>

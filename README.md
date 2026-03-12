@@ -15,6 +15,7 @@ EcoEvents is a full-stack web application designed for managing and participatin
 ## Tech Stack
 
 ### Backend
+
 - **Node.js** with **Express.js** for the API server.
 - **Sequelize** ORM with **MySQL** for database management.
 - **JWT** for authentication.
@@ -23,12 +24,14 @@ EcoEvents is a full-stack web application designed for managing and participatin
 - **CORS** for cross-origin requests.
 
 ### Frontend
+
 - **React** with **TypeScript** for the user interface.
 - **Vite** for fast development and building.
 - **SCSS** for styling.
 - **ESLint** for code linting.
 
 ### Other
+
 - **Postman Collection**: Available in `docs/EcoEvents.postman_collection.json` for API testing.
 - **Database Migrations/Seeds**: Managed via Sequelize CLI.
 
@@ -42,12 +45,14 @@ EcoEvents is a full-stack web application designed for managing and participatin
 ## Installation and Setup
 
 ### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/your-username/EcoEvents.git
 cd EcoEvents
 ```
 
 ### 2. Backend Setup
+
 1. Navigate to the backend directory:
    ```bash
    cd backend
@@ -59,15 +64,15 @@ cd EcoEvents
    ```
 
 3. Set up environment variables:
-   - Create a `.env` file in the `backend/` directory.
-   - Add the following (adjust values as needed):
+   - Create a `.env` file in the `backend/` directory based on `.env.example`:
      ```
      DB_HOST=localhost
      DB_USER=your_mysql_username
      DB_PASSWORD=your_mysql_password
-     DB_NAME=ecoevents_db
+     DB_NAME=eco_events
+     DB_DIALECT=mysql
      JWT_SECRET=your_jwt_secret_key
-     PORT=3000
+     PORT=8000
      ```
 
 4. Set up the database:
@@ -88,6 +93,7 @@ cd EcoEvents
    The server will run on `http://localhost:3000`.
 
 ### 3. Frontend Setup
+
 1. Navigate to the frontend directory:
    ```bash
    cd ../frontend
@@ -123,59 +129,111 @@ cd EcoEvents
 
 ## API Overview
 
-The backend provides RESTful APIs. Key endpoints (based on the Postman collection):
+The backend provides RESTful APIs. Key endpoints:
 
-- **Users**:
-  - `POST /api/users/register` - Register a new user.
-  - `POST /api/users/login` - Log in and get JWT token.
-  - `GET /api/users/profile` - Get user profile (authenticated).
+- **Users** (`/api/users`):
+  - `POST /api/users` - Register a new user.
+  - `POST /api/users/login` - Log in and get a JWT token.
+  - `GET /api/users/:id` - Get a user by ID (authenticated).
+  - `GET /api/users` - Get all users (admin only).
+  - `PUT /api/users/:id` - Update a user (authenticated).
+  - `DELETE /api/users/:id` - Delete a user (authenticated).
 
-- **Events**:
-  - `GET /api/events` - List all events.
-  - `POST /api/events` - Create a new event (authenticated).
-  - `GET /api/events/:id` - Get event details.
-  - `PUT /api/events/:id` - Update event (authenticated, owner/admin).
-  - `DELETE /api/events/:id` - Delete event (authenticated, owner/admin).
+- **Events** (`/api/events`):
+  - `GET /api/events` - List all events (authenticated).
+  - `POST /api/events` - Create a new event with image upload (authenticated).
+  - `GET /api/events/:id` - Get event details (authenticated).
+  - `PUT /api/events/:id` - Update event with image upload (admin only).
+  - `PUT /api/events/status/:id` - Update event status (admin only).
+  - `DELETE /api/events/:id` - Delete an event (admin only).
 
-- **Event Participants**:
-  - `POST /api/events/:id/participants` - Join an event (authenticated).
-  - `DELETE /api/events/:id/participants` - Leave an event (authenticated).
+- **Event Participants** (`/api/event-participants`):
+  - `POST /api/event-participants` - Join an event (authenticated).
+  - `GET /api/event-participants` - Get all participants (authenticated).
+  - `GET /api/event-participants/:id` - Get a participant by ID (authenticated).
+  - `PUT /api/event-participants/:id` - Update a participant (authenticated).
+  - `DELETE /api/event-participants/:id` - Leave an event (authenticated).
 
-- **Comments**:
-  - `GET /api/events/:id/comments` - Get comments for an event.
-  - `POST /api/events/:id/comments` - Add a comment (authenticated).
-  - `DELETE /api/comments/:id` - Delete a comment (authenticated, owner/admin).
+- **Comments** (`/api/comments`):
+  - `POST /api/comments` - Add a comment (authenticated).
+  - `GET /api/comments` - Get all comments (authenticated).
+  - `GET /api/comments/:id` - Get a comment by ID (authenticated).
+  - `PUT /api/comments/:id` - Update a comment (authenticated).
+  - `DELETE /api/comments/:id` - Delete a comment (authenticated).
 
-For full details, refer to the Postman collection or the route files in `backend/routes/`.
+For full details, refer to the Postman collection in `docs/EcoEvents.postman_collection.json` or the route files in `backend/routes/`.
 
 ## Project Structure
 
 ```
 EcoEvents/
 ├── backend/                 # Node.js/Express API
-│   ├── config/              # Database and app config
+│   ├── config/              # Database and Sequelize config
+│   │   ├── config.js
+│   │   └── db.js
 │   ├── controllers/         # Route handlers
-│   ├── middlewares/         # Auth and upload middleware
+│   │   ├── comment.controller.js
+│   │   ├── event.controller.js
+│   │   ├── event-participant.controller.js
+│   │   └── user.controller.js
+│   ├── middlewares/         # Auth (JWT) and Multer (file upload)
+│   │   ├── auth.js
+│   │   └── multer.js
 │   ├── migrations/          # Sequelize migrations
-│   ├── models/              # Database models
-│   ├── public/images/       # Uploaded images
-│   ├── routes/              # API routes
-│   ├── seeders/             # Sample data
+│   ├── models/              # Sequelize models
+│   │   ├── comment.model.js
+│   │   ├── event.model.js
+│   │   ├── event-participant.model.js
+│   │   ├── user.model.js
+│   │   └── index.js
+│   ├── public/images/       # Uploaded event images
+│   ├── routes/              # Express route definitions
+│   │   ├── comment.routes.js
+│   │   ├── event.routes.js
+│   │   ├── event-participant.routes.js
+│   │   └── user.routes.js
+│   ├── seeders/             # Sample data seeders
 │   ├── index.js             # Server entry point
 │   └── package.json
 ├── frontend/                # React/TypeScript app
 │   ├── src/
+│   │   ├── assets/          # Images and static files
 │   │   ├── Components/      # Reusable UI components
-│   │   ├── Pages/           # Page components
+│   │   │   ├── AdminEventCard/
+│   │   │   ├── Context/     # Auth context (AuthContext, AuthContextProvider)
+│   │   │   ├── Event-Card/
+│   │   │   ├── EventDetails/
+│   │   │   ├── Footer/
+│   │   │   ├── Header/
+│   │   │   ├── Input/
+│   │   │   ├── Submit/
+│   │   │   └── Title/
+│   │   ├── Pages/           # Page-level components
+│   │   │   ├── About/
+│   │   │   ├── Admin/
+│   │   │   ├── CreateEvent/
+│   │   │   ├── Event/
+│   │   │   ├── Events/
+│   │   │   ├── Login/
+│   │   │   ├── NotFound/
+│   │   │   └── SignUp/
 │   │   ├── Services/        # API service functions
-│   │   ├── Styles/          # Global styles
+│   │   │   ├── api.ts
+│   │   │   ├── CommentService.ts
+│   │   │   ├── EventParticipantService.ts
+│   │   │   ├── EventService.ts
+│   │   │   └── UserService.ts
+│   │   ├── Styles/          # Global SCSS variables
 │   │   ├── Types/           # TypeScript types
-│   │   └── App.tsx          # Main app component
-│   ├── public/              # Static assets
-│   ├── index.html           # HTML template
+│   │   ├── Utils/           # Utility functions (e.g. formatDate)
+│   │   ├── App.tsx          # App routes
+│   │   ├── Layout.tsx       # Shared layout (Header + Footer)
+│   │   └── main.tsx         # Entry point
+│   ├── index.html
 │   └── package.json
-├── docs/                    # Documentation and Postman collection
-└── README.md                # This file
+├── docs/                    # Postman collection
+│   └── EcoEvents.postman_collection.json
+└── README.md
 ```
 
 ## Contributing
@@ -189,11 +247,3 @@ EcoEvents/
 ## License
 
 This project is licensed under the ISC License. See the LICENSE file for details.
-
-## Troubleshooting
-
-- **Database Issues**: Ensure MySQL is running and credentials in `.env` are correct. Run `npm run drop:migrations` and `npm run migrations` to reset.
-- **Frontend Errors**: Check console for TypeScript/ESLint issues. Run `npm run lint` to fix.
-- **Port Conflicts**: Change ports in `.env` or Vite config if needed.
-
-For more help, check the code comments or open an issue on GitHub.

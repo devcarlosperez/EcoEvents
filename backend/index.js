@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/images', express.static('public/images'));
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 require("./routes/user.routes")(app);
 require("./routes/event.routes")(app);
