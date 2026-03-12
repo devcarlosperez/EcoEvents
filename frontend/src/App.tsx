@@ -9,22 +9,17 @@ import { Admin } from './Pages/Admin/Admin'
 
 function App() {
 
-
   return (
     <BrowserRouter>
-      <Routes>  
+      <Routes>
+        <Route path="/" element={<Login />}>
+        <Route path="/signup" element={<SignUp />} /
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        
-        <Route path="/" element={<Layout />}>
-          <Route path="/about" element={<About />} />
-          <Route path="/create-event" element={<CreateEvent />} />
-          <Route path="/events/:id" element={<Event />} />
-          <Route path="/admin" element={<Admin />} />
-          {/*other pages*/}
-        
-          </Route>
-
+        <Route element={<Layout />}>
+        <Route path="/about" element={<About />} />
+        <Route path="/create-event" element={<CreateEvent />} />
+        <Route path="/events/:id" element={<Event/>} />>
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   )

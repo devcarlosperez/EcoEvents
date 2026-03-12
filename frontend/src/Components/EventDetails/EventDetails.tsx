@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from './EventDetails.module.scss';
 import { createComment } from '../../Services/CommentService';
-
 import iconDate from '../../assets/Img/icon-input-date.svg';
 import iconTime from '../../assets/Img/icon-input-time.svg';
 import iconLocation from '../../assets/Img/icon-input-location.svg';

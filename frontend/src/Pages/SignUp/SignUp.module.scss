@@ -8,6 +8,8 @@ h1{
   align-items: center;
   height: 0;
   gap: 24;
+  margin-bottom: 32px;
+
 }
 .containerLogo {
   width: 100%;
@@ -17,6 +19,7 @@ h1{
 
 .logosvg {
   width: 185px;
+  margin-bottom: 32px;
 }
 
 
@@ -72,7 +75,7 @@ h1{
 .rightSide img {
   display: flex;
   justify-content: right;
-  width: 500px;
+  width: 900px;
   height:100%;
   object-fit: cover;
 }
