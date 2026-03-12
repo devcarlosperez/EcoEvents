@@ -39,7 +39,7 @@ module.exports = {
         event_date: '2024-05-05',
         event_time: '16:00',
         location: 'Centro Comunitario',
-        image_url: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b',
+        image_url: 'https://images.unsplash.com/photo-1604187351574-c75ca79f5807',
         max_participants: 20,
         status: 'approved',
         createdAt: new Date(),

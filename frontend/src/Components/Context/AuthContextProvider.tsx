@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import type { UserData } from '../../Types/Auth'
 import { AuthContext } from './AuthContext'
 
@@ -9,7 +9,7 @@ interface AuthContextProviderInterface {
 function decodeToken(token: string): UserData | null {
   try {
     const payload = JSON.parse(atob(token.split('.')[1]))
-    return { id: payload.id, name: '', surname: '', email: payload.email, role: payload.role, token }
+    return { id: payload.id, name: payload.name ?? '', surname: payload.surname ?? '', email: payload.email, role: payload.role, token }
   } catch {
     return null
   }

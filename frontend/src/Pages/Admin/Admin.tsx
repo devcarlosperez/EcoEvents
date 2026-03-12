@@ -2,6 +2,13 @@ import { useEffect, useState } from "react"
 import { AdminEventCard } from "../../Components/AdminEventCard/AdminEventCard"
 import { getAllEvents, updateEventStatus, deleteEvent } from "../../Services/EventService"
 import { getUserById } from "../../Services/UserService"
+import { formatDate } from "../../Utils/formatDate"
+
+function resolveImageUrl(image_url?: string | null): string | undefined {
+  if (!image_url) return undefined
+  if (image_url.startsWith('http://') || image_url.startsWith('https://')) return image_url
+  return `http://localhost:8000/images/${image_url}`
+}
 import { Title } from "../../Components/Title/title"
 
 interface EventData {
@@ -89,8 +96,8 @@ export function Admin() {
             <AdminEventCard
               key={ev.id}
               eventName={ev.name}
-              image={ev.image_url ? `http://localhost:8000/images/${ev.image_url}` : undefined}
-              date={ev.event_date}
+              image={resolveImageUrl(ev.image_url)}
+              date={formatDate(ev.event_date)}
               time={ev.event_time}
               location={ev.location}
               participants={ev.max_participants}
