@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type Dispatch, type SetStateAction } from 'react'
 import type { UserData } from '../../Types/Auth'
 import { AuthContext } from './AuthContext'
 
@@ -21,11 +21,26 @@ export const AuthContextProvider = ({ children }: AuthContextProviderInterface) 
     return token ? decodeToken(token) : null
   })
 
-  const handleSetUserData = (data: UserData | null) => {
-    if (data) {
-      localStorage.setItem('token', data.token)
+  const handleSetUserData: Dispatch<SetStateAction<UserData | null>> = (data) => {
+    // Soportar tanto valor directo como updater function
+    if (typeof data === 'function') {
+      setUserData((prev) => {
+        const next = (data as (prev: UserData | null) => UserData | null)(prev)
+        if (next) {
+          localStorage.setItem('token', next.token)
+        } else {
+          localStorage.removeItem('token')
+        }
+        return next
+      })
+    } else {
+      if (data) {
+        localStorage.setItem('token', data.token)
+      } else {
+        localStorage.removeItem('token')
+      }
+      setUserData(data)
     }
-    setUserData(data)
   }
 
   const logout = () => {
