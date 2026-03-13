@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './Event.module.scss';
 import { EventDetails } from '../../Components/EventDetails/EventDetails';

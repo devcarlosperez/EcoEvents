@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../Components/Context/AuthContext'
 import { EventCard } from '../../Components/Event-Card/EventCard'
 import { getAllEvents } from '../../Services/EventService'
